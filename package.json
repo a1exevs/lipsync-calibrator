@@ -1,51 +1,33 @@
 {
-  "name": "lipsync-calibrator",
-  "version": "0.7.0",
-  "description": "Application for calibrating visemes 3d models",
-  "author": "AlexEvs",
-  "private": true,
-  "bugs": {
-    "url": "https://github.com/a1exevs/lipsync-calibrator/issues"
-  },
-  "keywords": [
-    "lipsync",
-    "3d model",
-    "threejs"
-  ],
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "serve": "serve -s build",
-    "check-deps": "yarn outdated",
-    "upgrade-deps": "yarn upgrade --latest"
-  },
-  "dependencies": {
-    "@types/node": "20.12.12",
-    "@types/react": "18.3.2",
-    "@types/react-dom": "18.3.0",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "react-scripts": "5.0.1",
-    "serve": "14.2.3",
-    "typescript": "5.4.5"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+  "compilerOptions": {
+    "target": "es2021",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "rootDir": "./",
+    "baseUrl": "./",
+    "outDir": "build",
+    "paths": {
+      "src/*": [
+        "src/*"
+      ]
+    }
   },
-  "devDependencies": {}
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "build", "coverage", "**/*.test.ts", "**/*.test.tsx", "**/*.old.ts", "**/*.old.tsx"]
 }
