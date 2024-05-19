@@ -1,5 +1,4 @@
 {
-  "packageManager": "yarn@4.1.1"
   "name": "lipsync-calibrator",
   "version": "0.7.0",
   "description": "Application for calibrating visemes 3d models",
