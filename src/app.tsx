@@ -1,9 +1,9 @@
 import React from 'react';
 
-import logo from './logo.svg';
-import './App.css';
+import logo from 'src/logo.svg';
+import 'src/app.css';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +17,15 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
-export default App;
+const AppContainer: React.FC = () => {
+  return (
+    // TODO Uncomment me [146]
+    // <Provider store={store}>
+    <App />
+    // </Provider>
+  );
+};
+
+export default AppContainer;
