@@ -1,9 +1,11 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 
-import logo from './logo.svg';
-import './App.css';
+import logo from 'src/logo.svg';
+import store from 'src/store/store';
+import 'src/app.css';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +19,14 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
-export default App;
+const AppContainer: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
+
+export default AppContainer;
