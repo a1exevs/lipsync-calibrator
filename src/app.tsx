@@ -1,8 +1,6 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 
 import logo from 'src/logo.svg';
-import store from 'src/store/store';
 import 'src/app.css';
 
 const App: React.FC = () => {
@@ -23,9 +21,10 @@ const App: React.FC = () => {
 
 const AppContainer: React.FC = () => {
   return (
-    <Provider store={store}>
-      <App />
-    </Provider>
+    // TODO Uncomment me [146]
+    // <Provider store={store}>
+    <App />
+    // </Provider>
   );
 };
 
