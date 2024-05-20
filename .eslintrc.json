@@ -1,0 +1,108 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/**/*.{ts,tsx}"
+      ],
+      "excludedFiles": [
+        "src/**/*.spec.ts"
+      ],
+      "plugins": [
+        "@typescript-eslint",
+        "prettier",
+        "import",
+        "unused-imports"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "react-app",
+        "react-app/jest",
+        "airbnb-base",
+        "plugin:prettier/recommended",
+        "prettier"
+      ],
+      "rules": {
+        "no-console": "error",
+        "no-debugger": "error",
+        "import/no-unresolved": "error",
+        "import/extensions": "off",
+        "import/no-extraneous-dependencies": "off",
+        "import/prefer-default-export": "off",
+        "import/order": [
+          "error",
+          {
+            "alphabetize": {
+              "caseInsensitive": true,
+              "order": "asc"
+            },
+            "groups": [
+              [
+                "builtin",
+                "external",
+                "object",
+                "type"
+              ],
+              [
+                "internal",
+                "parent",
+                "sibling",
+                "index"
+              ]
+            ],
+            "newlines-between": "always"
+          }
+        ],
+        "sort-imports": [
+          "error",
+          {
+            "allowSeparatedGroups": true,
+            "ignoreCase": true,
+            "ignoreDeclarationSort": true,
+            "ignoreMemberSort": false,
+            "memberSyntaxSortOrder": [
+              "none",
+              "all",
+              "multiple",
+              "single"
+            ]
+          }
+        ],
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "unused-imports/no-unused-vars": [
+          "error",
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_.*",
+            "args": "after-used",
+            "argsIgnorePattern": "^_.*"
+          }
+        ],
+        "no-shadow": "off",
+        "no-plusplus": "off",
+        "lines-between-class-members": "off",
+        "no-multi-assign": "off",
+        "no-param-reassign": "off"
+      },
+      "settings": {
+        "import/resolver": {
+          "typescript": {
+            "alwaysTryTypes": true,
+            "project": "./"
+          }
+        }
+      }
+    }
+  ]
+}

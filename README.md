@@ -37,6 +37,18 @@ The build is minified and the filenames include the hashes.\
 ### `yarn run upgrade-deps`
 Checks/updates available dependencies to the latest version.
 
+### `yarn run format`
+Formats code using Prettier for TypeScript, TSX, and CSS, SCSS files.
+
+### `yarn run lint`
+Runs ESLint for static code analysis on TypeScript and TSX files.
+
+### `yarn run lint:fix`
+Fixes errors found by ESLint in TypeScript and TSX files.
+
+### `yarn run prepare`
+Automatically runs after dependencies installation to set up git hooks through husky.
+
 ## Repository
 Link to repository https://github.com/a1exevs/lipsync-calibrator.
 Link to project https://github.com/users/a1exevs/projects/3
