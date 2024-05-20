@@ -4,7 +4,7 @@
 Application for calibrating visemes 3d models.
 
 ## Yarn version
-v1.22.22
+v1.22.19
 
 ## Node version
 v18.17.1. Use NVM:
