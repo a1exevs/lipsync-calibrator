@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AnimationList from 'src/animation-list/animation-list';
+import AnimationList from 'src/ui/app-content/content/animation-list/animation-list';
 
 const AnimationListContainer: React.FC = () => {
   // TODO get from redux

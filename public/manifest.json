@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Lipsync Calibratory",
+  "name": "Lipsync Calibrator",
+  "description": "Application for calibrating visemes 3d models.",
   "icons": [
     {
       "src": "favicon.ico",

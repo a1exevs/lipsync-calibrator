@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FileUploader from 'src/file-uploader/file-uploader';
+import FileUploader from 'src/ui/app-content/content/file-uploader/file-uploader';
 
 const FileUploaderContainer: React.FC = () => {
   const setFilePath = (_: string) => {
