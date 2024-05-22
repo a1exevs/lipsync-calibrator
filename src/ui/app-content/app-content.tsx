@@ -11,9 +11,7 @@ import { flexGrowNormal } from 'src/ui/common/styles/consts';
 const AppContent: React.FC = () => {
   return (
     <>
-      <AppBar title={capitalizeLabel(currentLang.labels.APP_NAME)}></AppBar>
       <Content />
-      <AppFooter />
     </>
   );
 };
