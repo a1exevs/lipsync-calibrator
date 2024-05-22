@@ -1,0 +1,17 @@
+import { Container, ContainerProps } from '@material-ui/core';
+import { styled } from '@mui/material/styles';
+import React from 'react';
+
+import { windowMinWidth } from 'src/ui/common/styles/consts';
+
+const AppContainer = styled((props: ContainerProps) => <Container {...props} />)(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  color: theme.palette.text.primary,
+  padding: 0,
+  width: '100%',
+  minWidth: windowMinWidth,
+  minHeight: '100vh',
+  margin: '0 auto',
+}));
+
+export default AppContainer;

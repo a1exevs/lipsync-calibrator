@@ -1,31 +1,20 @@
 import React from 'react';
 
-import logo from 'src/logo.svg';
-import 'src/app.css';
+import AppContainer from 'src/ui/app-container/app-container';
+import AppContent from 'src/ui/app-content/app-content';
+import AppWrapper from 'src/ui/app-wrapper/app-wrapper';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-};
-
-const AppContainer: React.FC = () => {
-  return (
     // TODO Uncomment me [146]
     // <Provider store={store}>
-    <App />
+    <AppWrapper>
+      <AppContainer>
+        <AppContent />
+      </AppContainer>
+    </AppWrapper>
     // </Provider>
   );
 };
 
-export default AppContainer;
+export default App;
