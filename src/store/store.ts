@@ -1,8 +1,10 @@
 import { configureStore, createAsyncThunk } from '@reduxjs/toolkit';
 
+import appReducer, { APP_SLICE_NAME } from 'src/store/slices/app/app.slice';
+
 const store = configureStore({
   reducer: {
-    // TODO add reducers here
+    [APP_SLICE_NAME]: appReducer,
   },
 });
 
