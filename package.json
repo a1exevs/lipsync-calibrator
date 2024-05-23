@@ -13,7 +13,10 @@
     "threejs"
   ],
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run set-env:prod && react-scripts start",
+    "start:dev": "npm run set-env:dev && react-scripts start",
+    "set-env:prod": "node update-env.js prod",
+    "set-env:dev": "node update-env.js dev",
     "build": "react-scripts build",
     "serve": "serve -s build",
     "check-deps": "yarn outdated",
@@ -44,6 +47,7 @@
   },
   "devDependencies": {
     "@types/react-redux": "7.1.33",
+    "dotenv": "16.4.5",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-config-standard-with-typescript": "43.0.1",
@@ -51,8 +55,10 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-prettier": "5.1.3",
     "eslint-plugin-unused-imports": "3.2.0",
+    "fs": "0.0.1-security",
     "husky": "9.0.11",
     "lint-staged": "15.2.2",
+    "path": "0.12.7",
     "prettier": "3.2.5"
   },
   "browserslist": {
