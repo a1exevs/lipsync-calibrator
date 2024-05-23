@@ -5,6 +5,10 @@ import React from 'react';
 import { windowMinWidth } from 'src/ui/common/styles/consts';
 
 const AppContainer = styled((props: ContainerProps) => <Container {...props} />)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
   backgroundColor: theme.palette.background.default,
   color: theme.palette.text.primary,
   padding: 0,
