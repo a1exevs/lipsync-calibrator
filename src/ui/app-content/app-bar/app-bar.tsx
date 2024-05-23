@@ -15,7 +15,7 @@ const AppBar: React.FC<Props> = ({ title }) => {
 
   return (
     <MUIBox className={classes.appBar}>
-      <MUIAppBar position="fixed">
+      <MUIAppBar color="default" position="fixed">
         <Toolbar>
           <div className={classes.appBar__leftBlock}>
             <Typography variant="h6" color="inherit">
