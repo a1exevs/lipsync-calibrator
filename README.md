@@ -19,11 +19,33 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 In the project directory, you can run:
 
-### `yarn start`
+### `yarn run start`
+This script does the following:
+1. Runs `yarn run set-env:prod` to update the `.env` file with production settings.
+2. Runs `react-scripts start` to start the application in production mode.
+To start the application in production mode, run:
+yarn run start
+
+You will see any lint errors in the console.
+
+Runs the app in the production mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The page will reload if you make edits.\
+
+### `yarn run start:dev`
+This script does the following:
+1. Runs `npm run set-env:dev` to update the `.env` file with development settings.
+2. Runs `react-scripts start` to start the application in development mode.
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
-You will also see any lint errors in the console.
+
+### `yarn run set-env:prod`
+This script runs the `update-env.js` script with the `prod` argument. It updates the `.env` file with the production configuration settings from `config.json`.
+
+### `yarn run set-env:dev`
+This script runs the `update-env.js` script with the `dev` argument. It updates the `.env` file with the development configuration settings from `config.json`.
 
 ### `yarn run serve`
 Serves a static site (after app building via 'yarn run build:dev').

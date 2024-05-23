@@ -29,5 +29,14 @@
     }
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "build", "coverage", "**/*.test.ts", "**/*.test.tsx", "**/*.old.ts", "**/*.old.tsx"]
+  "exclude": [
+    "node_modules",
+    "dist", "build",
+    "coverage",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.old.ts",
+    "**/*.old.tsx",
+    "update-env.js"
+  ]
 }
