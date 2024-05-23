@@ -13,8 +13,8 @@
     "threejs"
   ],
   "scripts": {
-    "start": "npm run set-env:prod && react-scripts start",
-    "start:dev": "npm run set-env:dev && react-scripts start",
+    "start": "yarn run set-env:prod && react-scripts start",
+    "start:dev": "yarn run set-env:dev && react-scripts start",
     "set-env:prod": "node update-env.js prod",
     "set-env:dev": "node update-env.js dev",
     "build": "react-scripts build",
