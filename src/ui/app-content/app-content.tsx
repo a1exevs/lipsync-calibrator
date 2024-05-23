@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Content from 'src/ui/app-content/content/content';
+import ContentContainer from 'src/ui/app-content/content/content.container';
 
 const AppContent: React.FC = () => {
   return (
     <>
       {/* TODO configure app bar */}
-      <Content />
+      <ContentContainer />
       {/* TODO configure app footer container after implementation */}
     </>
   );
