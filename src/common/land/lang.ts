@@ -5,7 +5,9 @@ export type LanguageCode = (typeof languageCodes)[number];
 const enLabels = {
   APP_NAME: 'Lipsync calibrator',
 };
-const enMessages = {};
+const enMessages = {
+  THREE_D_MODEL_LOADED: `3d model (loaded - {0}%)`,
+};
 
 export type LanguageConstants = {
   labels: typeof enLabels;
