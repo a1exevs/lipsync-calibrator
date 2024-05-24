@@ -1,4 +1,5 @@
 import { DirectionalLight, Group, Light, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { LightShadow } from 'three/src/lights/LightShadow';
 
 import { ThreeDModelViewerDriver } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
@@ -17,6 +18,7 @@ import {
 import { windowMinWidth } from 'src/ui/common/styles/consts';
 
 export const fbxDriver: ThreeDModelViewerDriver = {
+  getLoader: () => new FBXLoader(),
   getConfiguredCamera: (): PerspectiveCamera => {
     const camera = new PerspectiveCamera(cameraFOV, camwraAspect, cameraNear, cameraFar);
     camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);

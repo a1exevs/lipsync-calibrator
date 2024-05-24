@@ -1,4 +1,4 @@
-import { Group, Light, Scene, WebGLRenderer } from 'three';
+import { Group, Light, Loader, Scene, WebGLRenderer } from 'three';
 import { Camera } from 'three/src/cameras/Camera';
 import { LightShadow } from 'three/src/lights/LightShadow';
 
@@ -8,6 +8,7 @@ export enum SupportedFileExtension {
 }
 
 export type ThreeDModelViewerDriver = {
+  getLoader: () => Loader<Group>;
   getConfiguredCamera: () => Camera;
   getLight: () => Light<LightShadow>;
   setModelToScene: (_: Group, __: Scene) => void;

@@ -39,7 +39,7 @@ const ThreeDModelViewer: React.FC<Props> = ({ filePath }) => {
 
       mountRef.current?.appendChild(renderer.domElement);
 
-      const loader = new FBXLoader();
+      const loader = driver.getLoader();
       loader.load(
         filePath,
         object => driver.setModelToScene(object, scene),
