@@ -9,7 +9,7 @@ import { getFileExtensionByPath, interpolateStrings } from 'src/common/helpers/s
 import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
 import { getDriverByFileExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map';
-import MUIBox from 'src/ui/common/components/mui-box/mui-box';
+import useClasses from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.styles';
 import MUIPaper from 'src/ui/common/components/mui-paper/mui-paper';
 
 type Props = {
@@ -25,6 +25,8 @@ type Props = {
 const ThreeDModelViewer: React.FC<Props> = ({ filePath }) => {
   const [progress, setProgress] = useState<number>(0);
   const mountRef = useRef<Nullable<HTMLDivElement>>(null);
+
+  const classes = useClasses();
 
   useEffect(() => {
     let renderer: Nullable<WebGLRenderer> = null;
@@ -68,14 +70,12 @@ const ThreeDModelViewer: React.FC<Props> = ({ filePath }) => {
   }, []);
 
   return (
-    <MUIBox>
+    <MUIPaper className={classes.threeDModelViewer} elevation={5}>
       <Typography align="center" variant="subtitle1">
         {interpolateStrings(currentLang.messages.THREE_D_MODEL_LOADED, String(progress))}
       </Typography>
-      <MUIPaper elevation={5}>
-        <div ref={mountRef} />
-      </MUIPaper>
-    </MUIBox>
+      <div ref={mountRef} />
+    </MUIPaper>
   );
 };
 
