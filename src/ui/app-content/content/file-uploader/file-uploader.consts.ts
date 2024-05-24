@@ -1,3 +1,1 @@
-const supportedFormats = 'VBX';
-
-export default supportedFormats;
+export const supportedFormats = 'fbx';
