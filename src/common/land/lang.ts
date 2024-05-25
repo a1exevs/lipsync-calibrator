@@ -4,9 +4,13 @@ export type LanguageCode = (typeof languageCodes)[number];
 
 const enLabels = {
   APP_NAME: 'Lipsync calibrator',
+  UPLOAD_FILE_BTN: 'Select model',
 };
 const enMessages = {
   THREE_D_MODEL_LOADED: `3d model (loaded - {0}%)`,
+  SUPPORTED_FORMATS: `Supported formats: {0}.`,
+  THIS_APP_FOR_CALIBRATE: `This application for calibrating visemes 3d models.`,
+  SELECT_THREE_D_FILE: `First, let's select the 3D model file you need.`,
 };
 
 export type LanguageConstants = {

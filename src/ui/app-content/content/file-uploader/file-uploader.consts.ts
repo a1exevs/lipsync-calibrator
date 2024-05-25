@@ -1,0 +1,1 @@
+export const supportedFormats = 'fbx';
