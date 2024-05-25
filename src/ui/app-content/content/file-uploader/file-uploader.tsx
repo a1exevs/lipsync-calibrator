@@ -19,13 +19,13 @@ const FileUploader: React.FC<Props> = () => {
 
   return (
     <MUIBox className={classes.fileUploader}>
-      <Typography variant="h6" color="inherit" align="center">
+      <Typography variant="body1" color="inherit" align="center">
         {currentLang.messages.THIS_APP_FOR_CALIBRATE} <br /> {currentLang.messages.SELECT_THREE_D_FILE}
       </Typography>
       <Button variant="contained" startIcon={<UploadFileOutlinedIcon />}>
         <label>{currentLang.labels.UPLOAD_FILE_BTN}</label>
       </Button>
-      <Typography variant="h6" align="center">
+      <Typography variant="body1" align="center">
         {interpolateStrings(currentLang.messages.SUPPORTED_FORMATS, String(supportedFormats))}
       </Typography>
     </MUIBox>
