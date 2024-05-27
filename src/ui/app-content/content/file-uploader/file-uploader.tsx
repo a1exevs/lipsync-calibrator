@@ -4,14 +4,14 @@ import React from 'react';
 
 import { interpolateStrings } from 'src/common/helpers/string';
 import { currentLang } from 'src/common/land/lang.helper';
+import { AnimationItem } from 'src/ui/app-content/content/animation-list/animation-list.types';
 import { supportedFormats } from 'src/ui/app-content/content/file-uploader/file-uploader.consts';
 import useClasses from 'src/ui/app-content/content/file-uploader/file-uploader.styles';
 import MUIBox from 'src/ui/common/components/mui-box/mui-box';
 
 type Props = {
   setFilePath: (_: string) => void;
-  // TODO Correct types when we will load animations via 3d model
-  setAvailableAnimationList: (animations: string[]) => void;
+  setAvailableAnimationList: (animations: AnimationItem[]) => void;
 };
 
 const FileUploader: React.FC<Props> = () => {

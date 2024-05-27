@@ -38,11 +38,11 @@ const appSlice = createSlice({
     resetAvailableAnimationList(state): void {
       state.availableAnimationList = [];
     },
-    setSelectedAnimation(state, { payload }: PayloadAction<{ animation: string }>): void {
-      state.selectedAnimation = payload.animation;
+    setSelectedAnimationUUID(state, { payload }: PayloadAction<{ animationUUID: string }>): void {
+      state.selectedAnimationUUID = payload.animationUUID;
     },
-    resetSelectedAnimation(state): void {
-      state.selectedAnimation = null;
+    resetSelectedAnimationUUID(state): void {
+      state.selectedAnimationUUID = null;
     },
   },
 });
@@ -54,8 +54,8 @@ export const {
   resetThreeDModelPath,
   setAvailableAnimationList,
   resetAvailableAnimationList,
-  setSelectedAnimation,
-  resetSelectedAnimation,
+  setSelectedAnimationUUID,
+  resetSelectedAnimationUUID,
 } = appSlice.actions;
 
 export const APP_SLICE_NAME = appSlice.name;
