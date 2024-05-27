@@ -1,9 +1,10 @@
 import React from 'react';
 
+import { AnimationItem } from 'src/ui/app-content/content/animation-list/animation-list.types';
+
 type Props = {
-  availableAnimations: string[];
-  // TODO Correct types when we will load animations via 3d model
-  setSelectedAnimation: (_: string) => void;
+  availableAnimations: AnimationItem[];
+  setSelectedAnimationUUID: (_: string) => void;
 };
 
 const AnimationList: React.FC<Props> = () => {

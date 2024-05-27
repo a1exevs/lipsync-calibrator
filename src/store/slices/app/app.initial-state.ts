@@ -5,5 +5,5 @@ export const initialState: AppState = {
   appStep: AppStep.FILE_UPLOADER_STEP,
   threeDModelPath: null,
   availableAnimationList: [],
-  selectedAnimation: null,
+  selectedAnimationUUID: null,
 };

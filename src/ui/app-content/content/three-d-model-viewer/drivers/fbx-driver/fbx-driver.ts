@@ -1,7 +1,18 @@
-import { DirectionalLight, Group, Light, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three';
+import {
+  AnimationMixer,
+  DirectionalLight,
+  Group,
+  Light,
+  PerspectiveCamera,
+  Scene,
+  Vector3,
+  WebGLRenderer,
+} from 'three';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { LightShadow } from 'three/src/lights/LightShadow';
 
+import { isEmpty, isUndefined } from 'src/common/helpers/guards';
+import { currentLang } from 'src/common/land/lang.helper';
 import { ThreeDModelViewerDriver } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 import {
   cameraFar,
@@ -32,7 +43,7 @@ export const fbxDriver: ThreeDModelViewerDriver = {
   },
   setModelToScene: (object: Group, scene: Scene) => {
     object.position.set(modelPosition.x, modelPosition.y, modelPosition.z);
-    object.rotateZ(-(Math.PI / 6));
+    object.rotateZ(Math.PI / 12);
     object.rotateX(Math.PI);
     scene.add(object);
   },
@@ -51,5 +62,18 @@ export const fbxDriver: ThreeDModelViewerDriver = {
     // TODO use in FileUploader for getting of available animation list data
     // TODO implement
     return [];
+  },
+  setupAndPlayAnimation: (object: Group, selectedAnimationUUID: string): AnimationMixer => {
+    const mixer = new AnimationMixer(object);
+    if (isEmpty(object.animations)) {
+      throw new Error(currentLang.errors.NO_AVAILABLE_ANIMATIONS);
+    }
+    const selected = object.animations.find(animation => animation.uuid === selectedAnimationUUID);
+    if (isUndefined(selected)) {
+      throw new Error(currentLang.errors.NO_SELECTED_ANIMATION);
+    }
+    const action = mixer.clipAction(selected);
+    action.play();
+    return mixer;
   },
 };
