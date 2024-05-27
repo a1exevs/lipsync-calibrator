@@ -5,6 +5,7 @@ export type LanguageCode = (typeof languageCodes)[number];
 const enLabels = {
   APP_NAME: 'Lipsync calibrator',
   UPLOAD_FILE_BTN: 'Select model',
+  BACK_BTN: 'BACK',
 };
 const enMessages = {
   THREE_D_MODEL_LOADED: `3D model (loaded - {0}%)`,

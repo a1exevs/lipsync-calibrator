@@ -1,5 +1,8 @@
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import { Button, IconButton } from '@mui/material';
 import React from 'react';
 
+import { currentLang } from 'src/common/land/lang.helper';
 import useClasses from 'src/ui/app-content/app-footer/app-footer.styles';
 import MUIBox from 'src/ui/common/components/mui-box/mui-box';
 
@@ -10,7 +13,11 @@ const AppFooter: React.FC = () => {
 
   return (
     <footer className={classes.appFooter}>
-      <MUIBox>footer</MUIBox>
+      <MUIBox>
+        <Button color="inherit" variant="text" size="large" startIcon={<KeyboardReturnIcon />}>
+          <label>{currentLang.labels.BACK_BTN}</label>
+        </Button>
+      </MUIBox>
     </footer>
   );
 };
