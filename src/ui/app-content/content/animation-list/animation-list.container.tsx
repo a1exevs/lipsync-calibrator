@@ -1,19 +1,23 @@
 import React from 'react';
 
+import { availableAnimationList } from 'src/store/slices/app/app.selectors';
+import { setSelectedAnimationUUID } from 'src/store/slices/app/app.slice';
 import AnimationList from 'src/ui/app-content/content/animation-list/animation-list';
-import { AnimationItem } from 'src/ui/app-content/content/animation-list/animation-list.types';
+import { useAppDispatch, useAppSelector } from 'src/ui/common/hooks/store-hooks';
 
 const AnimationListContainer: React.FC = () => {
-  // TODO get from redux
-  const availableAnimations: AnimationItem[] = [];
-  const setSelectedAnimationUUID = (_: string) => {
-    // TODO set to redux
+  const availableAnimations = useAppSelector(availableAnimationList);
+
+  const dispatch = useAppDispatch();
+
+  const setSelectedAnimation = (animationUUID: string) => {
+    dispatch(setSelectedAnimationUUID({ animationUUID }));
   };
 
   return (
     <AnimationList
       availableAnimations={availableAnimations}
-      setSelectedAnimationUUID={setSelectedAnimationUUID}
+      setSelectedAnimationUUID={setSelectedAnimation}
     ></AnimationList>
   );
 };
