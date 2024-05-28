@@ -1,4 +1,3 @@
-import { Theme } from '@mui/material';
 import { TypographyProps } from '@mui/material/Typography';
 
 export const MUISpacePx = 8;
