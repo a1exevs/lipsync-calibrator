@@ -8,13 +8,16 @@ import {
   Vector3,
   WebGLRenderer,
 } from 'three';
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
 import { LightShadow } from 'three/src/lights/LightShadow';
 
 import { isEmpty, isUndefined } from 'src/common/helpers/guards';
 import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
-import { ThreeDModelViewerDriver } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
+import { ThreeDModelFileLoaderFactory } from 'src/ui/app-content/content/file-uploader/helpers/file-loaders.factory';
+import {
+  SupportedThreeDModelExtension,
+  ThreeDModelViewerDriver,
+} from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 import {
   cameraFar,
   cameraFOV,
@@ -30,7 +33,7 @@ import {
 import { windowMinWidth } from 'src/ui/common/styles/consts';
 
 export const fbxDriver: ThreeDModelViewerDriver = {
-  getLoader: () => new FBXLoader(),
+  getLoader: () => ThreeDModelFileLoaderFactory.create(SupportedThreeDModelExtension.FBX),
   getConfiguredCamera: (): PerspectiveCamera => {
     const camera = new PerspectiveCamera(cameraFOV, camwraAspect, cameraNear, cameraFar);
     camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
