@@ -15,7 +15,7 @@ const AppFooter: React.FC = () => {
     <footer className={classes.appFooter}>
       <MUIBox>
         <Button color="inherit" variant="text" size="large" startIcon={<KeyboardReturnIcon />}>
-          <label>{currentLang.labels.BACK_BTN}</label>
+          {currentLang.labels.BACK_BTN}
         </Button>
       </MUIBox>
     </footer>
