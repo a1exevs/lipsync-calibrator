@@ -1,18 +1,18 @@
 import React from 'react';
 
+import { selectedAnimationUUID, threeDModelExtension } from 'src/store/slices/app/app.selectors';
 import { useError } from 'src/ui/app-content/content/error-context/use-error';
 import { useThreeDModel } from 'src/ui/app-content/content/three-d-model-context/use-three-d-model';
-import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 import ThreeDModelViewer from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer';
+import { useAppSelector } from 'src/ui/common/hooks/store-hooks';
 
 const ThreeDModelViewerContainer: React.FC = () => {
   const { setError, resetError } = useError();
 
-  // TODO Connect with store
-  const animationUUID = '';
-  const modelExtension = SupportedThreeDModelExtension.FBX;
-
   const { threeDModel } = useThreeDModel();
+
+  const animationUUID = useAppSelector(selectedAnimationUUID);
+  const modelExtension = useAppSelector(threeDModelExtension);
 
   return (
     <ThreeDModelViewer
