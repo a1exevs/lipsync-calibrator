@@ -2,6 +2,6 @@ import { getSupportedThreeDModelExtensions } from 'src/ui/app-content/content/fi
 
 export const supportedThreeDModelFormats = getSupportedThreeDModelExtensions().join(', ');
 
-export const threeDModelFileUploaderAccept = getSupportedThreeDModelExtensions()
+export const threeDModelUploaderAccept = getSupportedThreeDModelExtensions()
   .map(extension => `.${extension}`)
   .join(', ');

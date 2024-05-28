@@ -1,15 +1,14 @@
 import React from 'react';
 
-import { FBXDriverTestModelPath } from 'src/ui/app-content/content/three-d-model-viewer/drivers/fbx-driver/fbx-driver-test-models';
+import { useError } from 'src/ui/app-content/content/error-context/use-error';
 import ThreeDModelViewer from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer';
 
 const ThreeDModelViewerContainer: React.FC = () => {
-  // TODO get from redux
-  const filePath = FBXDriverTestModelPath.HUMAN;
-  // TODO get from redux
-  const selectedAnimationUUID = '';
+  const { setError, resetError } = useError();
 
-  return <ThreeDModelViewer filePath={filePath} selectedAnimationUUID={selectedAnimationUUID}></ThreeDModelViewer>;
+  // TODO Implement
+
+  return <ThreeDModelViewer filePath={''} setError={setError} resetError={resetError}></ThreeDModelViewer>;
 };
 
 export default ThreeDModelViewerContainer;

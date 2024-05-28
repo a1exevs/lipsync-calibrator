@@ -2,6 +2,8 @@ import { AnimationMixer, Group, Light, Loader, Scene, WebGLRenderer } from 'thre
 import { Camera } from 'three/src/cameras/Camera';
 import { LightShadow } from 'three/src/lights/LightShadow';
 
+import { Nullable } from 'src/common/types/common';
+
 export enum SupportedThreeDModelExtension {
   // TODO Support other extensions (gltf)
   FBX = 'fbx',
@@ -14,6 +16,5 @@ export type ThreeDModelViewerDriver = {
   setModelToScene: (_: Group, __: Scene) => void;
   getScene: (_: Light<LightShadow>) => Scene;
   getWebGlRenderer: () => WebGLRenderer;
-  getAnimationData: (_: Group, __: Scene) => string[];
-  setupAndPlayAnimation: (_: Group, __: string) => AnimationMixer;
+  setupAndPlayAnimation: (_: Group, __: Nullable<string>) => AnimationMixer;
 };
