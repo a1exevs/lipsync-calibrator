@@ -13,6 +13,7 @@ import { LightShadow } from 'three/src/lights/LightShadow';
 
 import { isEmpty, isUndefined } from 'src/common/helpers/guards';
 import { currentLang } from 'src/common/land/lang.helper';
+import { Nullable } from 'src/common/types/common';
 import { ThreeDModelViewerDriver } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 import {
   cameraFar,
@@ -58,12 +59,7 @@ export const fbxDriver: ThreeDModelViewerDriver = {
     renderer.setSize(size, size);
     return renderer;
   },
-  getAnimationData: (_: Group, __: Scene) => {
-    // TODO use in FileUploader for getting of available animation list data
-    // TODO implement
-    return [];
-  },
-  setupAndPlayAnimation: (object: Group, selectedAnimationUUID: string): AnimationMixer => {
+  setupAndPlayAnimation: (object: Group, selectedAnimationUUID: Nullable<string>): AnimationMixer => {
     const mixer = new AnimationMixer(object);
     if (isEmpty(object.animations)) {
       throw new Error(currentLang.errors.NO_AVAILABLE_ANIMATIONS);

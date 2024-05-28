@@ -3,3 +3,7 @@ import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-
 export function getSupportedThreeDModelExtensions(): string[] {
   return Object.values(SupportedThreeDModelExtension);
 }
+
+export function isThreeDModelExtensionSupported(fileExtension: string): boolean {
+  return getSupportedThreeDModelExtensions().includes(fileExtension);
+}

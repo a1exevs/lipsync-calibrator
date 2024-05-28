@@ -17,7 +17,7 @@
     "start:dev": "yarn run set-env:dev && react-scripts start",
     "set-env:prod": "node update-env.js prod",
     "set-env:dev": "node update-env.js dev",
-    "build": "react-scripts build",
+    "build": "yarn run format && react-scripts build",
     "serve": "serve -s build",
     "check-deps": "yarn outdated",
     "upgrade-deps": "yarn upgrade --latest",

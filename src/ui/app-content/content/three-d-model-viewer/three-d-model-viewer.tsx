@@ -1,27 +1,21 @@
-import Typography from '@material-ui/core/Typography';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { AnimationMixer, Clock, WebGLRenderer } from 'three';
 
 import { isEmpty, isNil, isNull } from 'src/common/helpers/guards';
-import { calculatePercentage } from 'src/common/helpers/number';
-import { getFileExtensionByPath, interpolateStrings } from 'src/common/helpers/string';
-import { currentLang } from 'src/common/land/lang.helper';
+import { getFileExtensionByPath } from 'src/common/helpers/string';
 import { Nullable } from 'src/common/types/common';
+import { ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-context/error.types';
 import { getDriverByFileExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map';
 import useClasses from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.styles';
 import MUIPaper from 'src/ui/common/components/mui-paper/mui-paper';
 
 type Props = {
-  /**
-   * Path to 3D model file.
-   * @details: The viewer shows a model from the first not empty path and ignore changes of this prop
-   */
   filePath: string;
-  selectedAnimationUUID: string;
+  setError: SetErrorFn;
+  resetError: ResetErrorFn;
 };
 
-const ThreeDModelViewer: React.FC<Props> = ({ filePath, selectedAnimationUUID }) => {
-  const [progress, setProgress] = useState<number>(0);
+const ThreeDModelViewer: React.FC<Props> = ({ setError, filePath }) => {
   const mountRef = useRef<Nullable<HTMLDivElement>>(null);
 
   const classes = useClasses();
@@ -45,10 +39,8 @@ const ThreeDModelViewer: React.FC<Props> = ({ filePath, selectedAnimationUUID })
     const loader = driver.getLoader();
     let mixer: Nullable<AnimationMixer> = null;
 
-    const object = await loader.loadAsync(filePath, event =>
-      setProgress(calculatePercentage(event.loaded, event.total)),
-    );
-    mixer = driver.setupAndPlayAnimation(object, selectedAnimationUUID);
+    const object = await loader.loadAsync(filePath);
+    mixer = driver.setupAndPlayAnimation(object, null);
     driver.setModelToScene(object, scene);
 
     const animate = () => {
@@ -77,8 +69,10 @@ const ThreeDModelViewer: React.FC<Props> = ({ filePath, selectedAnimationUUID })
 
         renderer = result;
       })
-      .catch(() => {
-        // TODO Show error via snack bar
+      .catch(e => {
+        if (e instanceof Error) {
+          setError(e.message, 'error');
+        }
       });
 
     return () => {
@@ -91,9 +85,6 @@ const ThreeDModelViewer: React.FC<Props> = ({ filePath, selectedAnimationUUID })
 
   return (
     <MUIPaper className={classes.threeDModelViewer} elevation={5}>
-      <Typography align="center" variant="subtitle1">
-        {interpolateStrings(currentLang.messages.THREE_D_MODEL_LOADED, String(progress))}
-      </Typography>
       <div ref={mountRef} />
     </MUIPaper>
   );
