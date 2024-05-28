@@ -3,7 +3,7 @@ import { AppState } from 'src/store/slices/app/app.types';
 
 export const initialState: AppState = {
   appStep: AppStep.FILE_UPLOADER_STEP,
-  threeDModelPath: null,
+  threeDModelExtension: null,
   availableAnimationList: [],
   selectedAnimationUUID: null,
 };

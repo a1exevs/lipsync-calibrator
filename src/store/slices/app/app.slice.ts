@@ -3,6 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { APP_STEPS } from 'src/store/slices/app/app.consts';
 import { getAppStepIndex } from 'src/store/slices/app/app.helpers';
 import { initialState } from 'src/store/slices/app/app.initial-state';
+import { AnimationItem } from 'src/ui/app-content/content/animation-list/animation-list.types';
+import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 
 const appSlice = createSlice({
   name: 'app',
@@ -26,13 +28,13 @@ const appSlice = createSlice({
       const firstStep = APP_STEPS[0];
       state.appStep = firstStep;
     },
-    setThreeDModelPath(state, { payload }: PayloadAction<{ path: string }>): void {
-      state.threeDModelPath = payload.path;
+    setThreeDModelExtension(state, { payload }: PayloadAction<{ extension: SupportedThreeDModelExtension }>): void {
+      state.threeDModelExtension = payload.extension;
     },
-    resetThreeDModelPath(state): void {
-      state.threeDModelPath = null;
+    resetThreeDModelExtension(state): void {
+      state.threeDModelExtension = null;
     },
-    setAvailableAnimationList(state, { payload }: PayloadAction<{ animations: string[] }>): void {
+    setAvailableAnimationList(state, { payload }: PayloadAction<{ animations: AnimationItem[] }>): void {
       state.availableAnimationList = payload.animations;
     },
     resetAvailableAnimationList(state): void {
@@ -50,8 +52,8 @@ export const {
   nextStep,
   previousStep,
   goToFirstStep,
-  setThreeDModelPath,
-  resetThreeDModelPath,
+  setThreeDModelExtension,
+  resetThreeDModelExtension,
   setAvailableAnimationList,
   resetAvailableAnimationList,
   setSelectedAnimationUUID,
