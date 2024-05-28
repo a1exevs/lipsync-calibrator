@@ -1,9 +1,9 @@
 import React from 'react';
 
-import FileUploaderContainer from './file-uploader/file-uploader.container';
 import { AppStep } from 'src/common/types/app';
 import ErrorBar from 'src/ui/app-content/content/error-bar/error-bar';
 import ErrorProvider from 'src/ui/app-content/content/error-context/error.provider';
+import FileUploaderContainer from 'src/ui/app-content/content/file-uploader/file-uploader.container';
 import ThreeDModelProvider from 'src/ui/app-content/content/three-d-model-context/three-d-model.provider';
 
 type Props = {
