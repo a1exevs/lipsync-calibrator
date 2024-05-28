@@ -10,7 +10,7 @@ const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export type RootStory = typeof store;
+export type RootStore = typeof store;
 export type AsyncThunkConfig = { state: RootState; dispatch: AppDispatch };
 type CreateAsyncThunkParams<InputParams, ReturnValues> = Parameters<
   typeof createAsyncThunk<ReturnValues, InputParams, AsyncThunkConfig>
