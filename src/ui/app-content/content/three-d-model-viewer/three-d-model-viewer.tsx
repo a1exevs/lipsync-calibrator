@@ -8,6 +8,7 @@ import { getDriverByFileExtension } from 'src/ui/app-content/content/three-d-mod
 import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 import useClasses from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.styles';
 import MUIPaper from 'src/ui/common/components/mui-paper/mui-paper';
+import { elevationNormal } from 'src/ui/common/styles/consts';
 
 type Props = {
   /**
@@ -87,7 +88,7 @@ const ThreeDModelViewer: React.FC<Props> = ({ model, modelExtension, selectedAni
   }, [model]);
 
   return (
-    <MUIPaper className={classes.threeDModelViewer} elevation={5}>
+    <MUIPaper className={classes.threeDModelViewer} elevation={elevationNormal}>
       <div ref={mountRef} />
     </MUIPaper>
   );

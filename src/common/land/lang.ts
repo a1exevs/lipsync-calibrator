@@ -6,6 +6,7 @@ const enLabels = {
   APP_NAME: 'Lipsync calibrator',
   UPLOAD_FILE_BTN: 'Select model',
   BACK_BTN: 'BACK',
+  DURATION: 'Duration: {0} s',
 };
 const enMessages = {
   THREE_D_MODEL_LOADED: `3D model (loaded - {0}%)`,

@@ -31,6 +31,8 @@ export const transformFast = '0.3s ease-out';
 
 export const circleBorder = '50%';
 
+export const elevationNormal = 5;
+
 export const textOverflowEllipsis = (): TypographyProps => {
   return {
     textOverflow: 'ellipsis',
