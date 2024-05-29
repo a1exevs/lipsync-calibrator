@@ -14,7 +14,6 @@ const useClasses = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     gap: MUISpacePx,
-    maxWidth: 'calc(100% - 55px)',
   },
 }));
 
