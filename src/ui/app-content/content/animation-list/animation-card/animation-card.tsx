@@ -14,7 +14,7 @@ type Props = {
   duration: number;
 };
 
-export const AnimationCard: React.FC<Props> = ({ name, duration }) => {
+const AnimationCard: React.FC<Props> = ({ name, duration }) => {
   const classes = useClasses();
   const durationStr = interpolateStrings(currentLang.labels.DURATION, String(duration));
 
@@ -32,3 +32,5 @@ export const AnimationCard: React.FC<Props> = ({ name, duration }) => {
     </MUIPaper>
   );
 };
+
+export default AnimationCard;
