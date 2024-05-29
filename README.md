@@ -1,7 +1,7 @@
 # Lipsync Calibrator
 
 # Description
-Application for calibrating visemes 3d models.
+Application for calibrating viseme 3D models.
 
 ## Yarn version
 v1.22.19
