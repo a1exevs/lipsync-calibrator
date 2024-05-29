@@ -1,11 +1,6 @@
 import React from 'react';
 
-import {
-  nextStep,
-  setAvailableAnimationList,
-  setSelectedAnimationUUID,
-  setThreeDModelExtension,
-} from 'src/store/slices/app/app.slice';
+import { nextStep, setAvailableAnimationList, setThreeDModelExtension } from 'src/store/slices/app/app.slice';
 import { AnimationItem } from 'src/ui/app-content/content/animation-list/animation-list.types';
 import { useError } from 'src/ui/app-content/content/error-context/use-error';
 import FileUploader from 'src/ui/app-content/content/file-uploader/file-uploader';
@@ -23,9 +18,8 @@ const FileUploaderContainer: React.FC = () => {
   };
   const setAnimationList = (animations: AnimationItem[]): void => {
     dispatch(setAvailableAnimationList({ animations }));
-    // REMOVE
-    dispatch(setSelectedAnimationUUID({ animationUUID: animations[0].uuid }));
-    dispatch(nextStep());
+  };
+  const goToNextAppStep = (): void => {
     dispatch(nextStep());
   };
 
@@ -36,6 +30,7 @@ const FileUploaderContainer: React.FC = () => {
       setAvailableAnimationList={setAnimationList}
       setError={setError}
       resetError={resetError}
+      goToNextStep={goToNextAppStep}
     ></FileUploader>
   );
 };

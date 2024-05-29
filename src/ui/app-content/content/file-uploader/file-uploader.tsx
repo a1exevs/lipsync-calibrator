@@ -28,6 +28,7 @@ type Props = {
   setAvailableAnimationList: (animations: AnimationItem[]) => void;
   setError: SetErrorFn;
   resetError: ResetErrorFn;
+  goToNextStep: () => void;
 };
 
 const FileUploader: React.FC<Props> = ({
@@ -36,6 +37,7 @@ const FileUploader: React.FC<Props> = ({
   setThreeDModel,
   setAvailableAnimationList,
   setThreeDModelExtension,
+  goToNextStep,
 }) => {
   // TODO add progress component
   const [_, setProgress] = useState<number>(0);
@@ -69,6 +71,7 @@ const FileUploader: React.FC<Props> = ({
       setAvailableAnimationList(getAvailableAnimationListByModel(model));
 
       resetError();
+      goToNextStep();
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message, 'error');
