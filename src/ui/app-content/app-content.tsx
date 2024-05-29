@@ -3,7 +3,7 @@ import React from 'react';
 import { capitalizeLabel } from 'src/common/helpers/string';
 import { currentLang } from 'src/common/land/lang.helper';
 import AppBar from 'src/ui/app-content/app-bar/app-bar';
-import AppFooter from 'src/ui/app-content/app-footer/app-footer';
+import AppFooterContainer from 'src/ui/app-content/app-footer/app-footer.container';
 import ContentContainer from 'src/ui/app-content/content/content.container';
 
 const AppContent: React.FC = () => {
@@ -11,7 +11,7 @@ const AppContent: React.FC = () => {
     <>
       <AppBar title={capitalizeLabel(currentLang.labels.APP_NAME)} />
       <ContentContainer />
-      <AppFooter />
+      <AppFooterContainer />
     </>
   );
 };
