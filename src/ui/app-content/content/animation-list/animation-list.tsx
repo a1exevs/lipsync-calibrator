@@ -4,6 +4,7 @@ import React from 'react';
 import { sliceNumber } from 'src/common/helpers/number';
 import { currentLang } from 'src/common/land/lang.helper';
 import AnimationCard from 'src/ui/app-content/content/animation-list/animation-card/animation-card';
+import { durationNumOfChars } from 'src/ui/app-content/content/animation-list/animation-list.consts';
 import useClasses from 'src/ui/app-content/content/animation-list/animation-list.styles';
 import { AnimationItem } from 'src/ui/app-content/content/animation-list/animation-list.types';
 import MUIBox from 'src/ui/common/components/mui-box/mui-box';
@@ -30,7 +31,7 @@ const AnimationList: React.FC<Props> = ({ availableAnimations, setSelectedAnimat
       <MUIBox>
         {availableAnimations.map(animation => (
           <MUIBox onClick={() => handleAnimationCardClick(animation.uuid)} key={animation.uuid}>
-            <AnimationCard name={animation.name} duration={sliceNumber(animation.duration, 3)} />
+            <AnimationCard name={animation.name} duration={sliceNumber(animation.duration, durationNumOfChars)} />
           </MUIBox>
         ))}
       </MUIBox>
