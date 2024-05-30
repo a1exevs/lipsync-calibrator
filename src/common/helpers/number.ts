@@ -5,3 +5,7 @@ export function calculatePercentage(part: number, total: number): number {
 
   return Math.floor((part / total) * 100);
 }
+
+export function sliceNumber(num: number, numOfChars: number): number {
+  return Number(num.toFixed(numOfChars));
+}
