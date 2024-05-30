@@ -8,16 +8,23 @@ import MUIBox from 'src/ui/common/components/mui-box/mui-box';
 
 type Props = {
   showBackButton: boolean;
+  onBackButtonClick: () => void;
 };
 
-const AppFooter: React.FC<Props> = ({ showBackButton }) => {
+const AppFooter: React.FC<Props> = ({ showBackButton, onBackButtonClick }) => {
   const classes = useClasses();
 
   return (
     <footer className={classes.appFooter}>
       <MUIBox>
         {showBackButton && (
-          <Button color="inherit" variant="text" size="large" startIcon={<KeyboardReturnIcon />}>
+          <Button
+            onClick={onBackButtonClick}
+            color="inherit"
+            variant="text"
+            size="large"
+            startIcon={<KeyboardReturnIcon />}
+          >
             {currentLang.labels.BACK_BTN}
           </Button>
         )}
