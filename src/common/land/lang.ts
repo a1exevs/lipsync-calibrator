@@ -7,6 +7,7 @@ const enLabels = {
   UPLOAD_FILE_BTN: 'Select model',
   BACK_BTN: 'BACK',
   DURATION: 'Duration: {0} s',
+  AVAILABLE_ANIMATIONS: 'Available animations',
 };
 const enMessages = {
   THREE_D_MODEL_LOADED: `3D model (loaded - {0}%)`,
