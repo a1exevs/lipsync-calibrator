@@ -1,15 +1,26 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import { cardHSpacePx } from './animation-card.consts';
-import { MUISpacePx } from 'src/ui/common/styles/consts';
+import {
+  cardHSpacePx,
+  maxWidthPercent,
+} from 'src/ui/app-content/content/animation-list/animation-card/animation-card.consts';
+import { cbLikeEaseInOut, durationSmall, MUISpacePx, opacityMedium } from 'src/ui/common/styles/consts';
 
 const useClasses = makeStyles(() => ({
   animationCard: {
+    maxWidth: maxWidthPercent,
+    transition: `opacity ${durationSmall} ${cbLikeEaseInOut}`,
+    cursor: 'pointer',
+
+    '&:hover': {
+      opacity: opacityMedium,
+    },
+  },
+  animationCard__paper: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     gap: cardHSpacePx,
-    maxWidth: '100%',
   },
   animationCard__rightBlock: {
     display: 'flex',
