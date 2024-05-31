@@ -10,8 +10,6 @@ import {
 } from 'three';
 import { LightShadow } from 'three/src/lights/LightShadow';
 
-import { isEmpty, isUndefined } from 'src/common/helpers/guards';
-import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
 import { ThreeDModelFileLoaderFactory } from 'src/ui/app-content/content/file-uploader/helpers/file-loaders.factory';
 import {
@@ -30,6 +28,10 @@ import {
   lightPosition,
   modelPosition,
 } from 'src/ui/app-content/content/three-d-model-viewer/drivers/fbx-driver/fbx-driver.consts';
+import {
+  getSelectedAnimation,
+  stopAllAnimationsForMixer,
+} from 'src/ui/app-content/content/three-d-model-viewer/drivers/fbx-driver/fbx-driver.helpers';
 import { windowMinWidth } from 'src/ui/common/styles/consts';
 
 export const fbxDriver: ThreeDModelViewerDriver = {
@@ -64,15 +66,18 @@ export const fbxDriver: ThreeDModelViewerDriver = {
   },
   setupAndPlayAnimation: (object: Group, selectedAnimationUUID: Nullable<string>): AnimationMixer => {
     const mixer = new AnimationMixer(object);
-    if (isEmpty(object.animations)) {
-      throw new Error(currentLang.errors.NO_AVAILABLE_ANIMATIONS);
-    }
-    const selected = object.animations.find(animation => animation.uuid === selectedAnimationUUID);
-    if (isUndefined(selected)) {
-      throw new Error(currentLang.errors.NO_SELECTED_ANIMATION);
-    }
+    const selected = getSelectedAnimation(object, selectedAnimationUUID);
     const action = mixer.clipAction(selected);
     action.play();
     return mixer;
+  },
+  rerunAnimation: (object: Group, selectedAnimationUUID: Nullable<string>, mixer: AnimationMixer): void => {
+    stopAllAnimationsForMixer(mixer);
+    const selected = getSelectedAnimation(object, selectedAnimationUUID);
+    const action = mixer.clipAction(selected);
+    action.play();
+  },
+  stopAllAnimations: (mixer: AnimationMixer): void => {
+    stopAllAnimationsForMixer(mixer);
   },
 };

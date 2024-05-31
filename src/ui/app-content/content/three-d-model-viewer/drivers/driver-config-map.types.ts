@@ -17,4 +17,6 @@ export type ThreeDModelViewerDriver = {
   getScene: (_: Light<LightShadow>) => Scene;
   getWebGlRenderer: () => WebGLRenderer;
   setupAndPlayAnimation: (_: Group, __: Nullable<string>) => AnimationMixer;
+  rerunAnimation: (_: Group, __: Nullable<string>, ___: AnimationMixer) => void;
+  stopAllAnimations: (_: AnimationMixer) => void;
 };

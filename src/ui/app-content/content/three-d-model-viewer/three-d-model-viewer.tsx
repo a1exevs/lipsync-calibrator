@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { AnimationMixer, Clock, Group, WebGLRenderer } from 'three';
+import { AnimationMixer, Clock, Group, Scene, WebGLRenderer } from 'three';
+import { Camera } from 'three/src/cameras/Camera';
 
-import { isEmpty, isNil, isNull } from 'src/common/helpers/guards';
+import { isNull } from 'src/common/helpers/guards';
 import { Nullable } from 'src/common/types/common';
 import { ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-context/error.types';
 import { getDriverByFileExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map';
@@ -11,81 +12,153 @@ import MUIPaper from 'src/ui/common/components/mui-paper/mui-paper';
 import { elevationNormal } from 'src/ui/common/styles/consts';
 
 type Props = {
-  /**
-   * 3D model file.
-   * @details: The viewer shows a model from the first not nullable model and ignore changes of this prop
-   */
   model: Nullable<Group>;
   modelExtension: Nullable<SupportedThreeDModelExtension>;
   selectedAnimationUUID: Nullable<string>;
   setError: SetErrorFn;
   resetError: ResetErrorFn;
+  blockUI: () => void;
+  unblockUI: () => void;
 };
 
-const ThreeDModelViewer: React.FC<Props> = ({ model, modelExtension, selectedAnimationUUID, setError }) => {
+const ThreeDModelViewer: React.FC<Props> = ({
+  model,
+  modelExtension,
+  selectedAnimationUUID,
+  setError,
+  blockUI,
+  unblockUI,
+}) => {
   const mountRef = useRef<Nullable<HTMLDivElement>>(null);
+  const rendererRef = useRef<Nullable<WebGLRenderer>>(null);
+  const mixerRef = useRef<Nullable<AnimationMixer>>(null);
+  const requestAnimationRef = useRef<Nullable<number>>(null);
+  const clockRef = useRef<Nullable<Clock>>(null);
+  const sceneRef = useRef<Nullable<Scene>>(null);
+  const cameraRef = useRef<Nullable<Camera>>(null);
 
   const classes = useClasses();
 
-  const init = async (threeDModel: Nullable<Group>): Promise<Nullable<WebGLRenderer>> => {
-    if (isNull(threeDModel) || !isEmpty(mountRef?.current?.children)) {
+  const animate = (): Nullable<number> => {
+    if (isNull(requestAnimationRef.current)) {
+      return null;
+    }
+    requestAnimationRef.current = requestAnimationFrame(animate);
+    if (
+      !isNull(sceneRef.current) &&
+      !isNull(cameraRef.current) &&
+      !isNull(mixerRef.current) &&
+      !isNull(rendererRef.current) &&
+      !isNull(clockRef.current)
+    ) {
+      mixerRef.current.update(clockRef.current.getDelta());
+      rendererRef.current.render(sceneRef.current, cameraRef.current);
+    }
+    return requestAnimationRef.current;
+  };
+
+  const init = (
+    threeDModel: Nullable<Group>,
+    uuid: Nullable<string>,
+  ): Nullable<{ renderer: WebGLRenderer; mixer: AnimationMixer; clock: Clock; scene: Scene; camera: Camera }> => {
+    if (isNull(modelExtension) || isNull(threeDModel)) {
       return null;
     }
 
-    let renderer: Nullable<WebGLRenderer> = null;
-    const clock = new Clock();
     const driver = getDriverByFileExtension(modelExtension);
+
+    if (
+      !isNull(sceneRef.current) &&
+      !isNull(cameraRef.current) &&
+      !isNull(mixerRef.current) &&
+      !isNull(rendererRef.current) &&
+      !isNull(clockRef.current)
+    ) {
+      if (isNull(uuid)) {
+        driver.stopAllAnimations(mixerRef.current);
+        requestAnimationRef.current = null;
+        return null;
+      }
+      driver.rerunAnimation(threeDModel, selectedAnimationUUID, mixerRef.current);
+      requestAnimationRef.current = -1;
+      requestAnimationRef.current = animate();
+      return {
+        renderer: rendererRef.current,
+        mixer: mixerRef.current,
+        clock: clockRef.current,
+        scene: sceneRef.current,
+        camera: cameraRef.current,
+      };
+    }
+
+    if (isNull(uuid)) {
+      return null;
+    }
+
+    const clock = new Clock();
     const camera = driver.getConfiguredCamera();
-    renderer = driver.getWebGlRenderer();
+    const renderer = driver.getWebGlRenderer();
     const light = driver.getLight();
     const scene = driver.getScene(light);
-
-    mountRef.current?.appendChild(renderer.domElement);
-
-    let mixer: Nullable<AnimationMixer> = null;
-
-    mixer = driver.setupAndPlayAnimation(threeDModel, selectedAnimationUUID);
+    const mixer: Nullable<AnimationMixer> = driver.setupAndPlayAnimation(threeDModel, selectedAnimationUUID);
     driver.setModelToScene(threeDModel, scene);
 
-    const animate = () => {
-      requestAnimationFrame(animate);
-      const delta = clock.getDelta();
+    requestAnimationRef.current = -1;
+    requestAnimationRef.current = animate();
 
-      if (!isNull(mixer)) {
-        mixer?.update(delta);
-      }
+    return { renderer, mixer, clock, scene, camera };
+  };
 
-      renderer?.render(scene, camera);
-    };
-    animate();
+  const clearAnimationFrame = (): void => {
+    if (!isNull(requestAnimationRef.current)) {
+      cancelAnimationFrame(requestAnimationRef.current);
+      requestAnimationRef.current = null;
+    }
+  };
 
-    return renderer;
+  const unmountScene = (): void => {
+    if (!isNull(rendererRef.current) && !isNull(mountRef.current)) {
+      mountRef.current.removeChild(rendererRef.current.domElement);
+      rendererRef.current.dispose();
+      rendererRef.current.resetState();
+      rendererRef.current = null;
+    }
+    if (!isNull(mixerRef.current)) {
+      mixerRef.current.stopAllAction();
+      mixerRef.current = null;
+    }
+    clockRef.current = null;
+    sceneRef.current = null;
+    cameraRef.current = null;
+    clearAnimationFrame();
   };
 
   useEffect(() => {
-    const mountedVariable = mountRef.current;
-    let renderer: Nullable<WebGLRenderer> = null;
-    init(model)
-      .then(result => {
-        if (isNull(result)) {
-          return;
-        }
+    return () => unmountScene();
+  }, []);
 
-        renderer = result;
-      })
-      .catch(e => {
-        if (e instanceof Error) {
-          setError(e.message, 'error');
-        }
-      });
-
-    return () => {
-      if (!isNull(renderer) && !isNil(mountedVariable)) {
-        mountedVariable.removeChild(renderer.domElement);
-        renderer.dispose();
+  useEffect(() => {
+    try {
+      // TODO Research why blockUI doesn't work
+      blockUI();
+      const result = init(model, selectedAnimationUUID);
+      if (!isNull(result)) {
+        const { renderer, mixer, clock, scene, camera } = result;
+        rendererRef.current = renderer;
+        mixerRef.current = mixer;
+        clockRef.current = clock;
+        cameraRef.current = camera;
+        sceneRef.current = scene;
+        mountRef.current?.appendChild(renderer.domElement);
       }
-    };
-  }, [model]);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message, 'error');
+      }
+    } finally {
+      unblockUI();
+    }
+  }, [model, selectedAnimationUUID]);
 
   return (
     <MUIPaper className={classes.threeDModelViewer} elevation={elevationNormal}>
