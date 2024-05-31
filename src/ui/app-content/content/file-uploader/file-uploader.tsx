@@ -29,6 +29,8 @@ type Props = {
   setError: SetErrorFn;
   resetError: ResetErrorFn;
   goToNextStep: () => void;
+  blockUI: () => void;
+  unblockUI: () => void;
 };
 
 const FileUploader: React.FC<Props> = ({
@@ -38,6 +40,8 @@ const FileUploader: React.FC<Props> = ({
   setAvailableAnimationList,
   setThreeDModelExtension,
   goToNextStep,
+  blockUI,
+  unblockUI,
 }) => {
   // TODO add progress component
   const [_, setProgress] = useState<number>(0);
@@ -48,6 +52,7 @@ const FileUploader: React.FC<Props> = ({
 
   const handleThreeDModelFileChange = async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
     try {
+      blockUI();
       const file = event.target.files?.[0];
       if (isUndefined(file) || !file.size) {
         throw new Error(currentLang.errors.INVALID_FILE);
@@ -78,6 +83,7 @@ const FileUploader: React.FC<Props> = ({
       }
     } finally {
       event.target.value = '';
+      unblockUI();
     }
   };
 
