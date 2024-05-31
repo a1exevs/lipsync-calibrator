@@ -2,6 +2,7 @@ import React from 'react';
 
 import { AppStep } from 'src/common/types/app';
 import { isFirstStep } from 'src/store/slices/app/app.helpers';
+import AnimationListContainer from 'src/ui/app-content/content/animation-list/animation-list.container';
 import ErrorBar from 'src/ui/app-content/content/error-bar/error-bar';
 import ErrorProvider from 'src/ui/app-content/content/error-context/error.provider';
 import FileUploaderContainer from 'src/ui/app-content/content/file-uploader/file-uploader.container';
@@ -23,8 +24,7 @@ const Content: React.FC<Props> = ({ step }) => {
         <UIBlocker />
         <ThreeDModelProvider>
           {step === AppStep.FILE_UPLOADER_STEP && <FileUploaderContainer />}
-          {/* TODO configure */}
-          {step === AppStep.ANIMATION_LIST_STEP && <label>AnimationListContainer</label>}
+          {step === AppStep.ANIMATION_LIST_STEP && <AnimationListContainer />}
           {/* TOOD Improve configurationn of ThreeDModelViewerContainer */}
           {!isFirstStep(step) && (
             <MUIBox display={step !== AppStep.THREE_D_MODEL_VIEWER_STEP ? 'none' : ''}>
