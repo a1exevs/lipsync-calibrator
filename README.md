@@ -51,15 +51,28 @@ This script runs the `update-env.js` script with the `dev` argument. It updates 
 Serves a static site (after app building via 'yarn run build:dev').
 
 ### `yarn run build`
-Builds the app for production to the `build` folder.\
+Builds the app for delivery to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 The build is minified and the filenames include the hashes.\
 
 ### `yarn run build:delivery`
-Prepares your React app for production by formatting code, fixing lint errors, and creating an optimized build.
+Prepares your React app for delivery (via yarn run build) by formatting code, fixing lint errors, and creating an optimized build.
 1. Formatting: Runs yarn run format.
 2. Linting: Executes yarn run lint:fix.
 3. Production Build: Uses react-scripts build for a minified, optimized bundle.
+
+### `yarn run build:prod`
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn run predeploy`
+Runs prettier, linter, then builds the app (via `yarn run build:prod`). Needs for deployment.
+
+### `yarn run deploy`
+Deploys app on Github Pages.
 
 ### `yarn run check-deps`
 ### `yarn run upgrade-deps`
