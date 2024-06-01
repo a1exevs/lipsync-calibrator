@@ -1,3 +1,79 @@
 {
-  "packageManager": "yarn@4.1.1"
+  "name": "lipsync-calibrator",
+  "version": "0.7.0",
+  "description": "Application for calibrating viseme 3D models.",
+  "author": "AlexEvs",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/a1exevs/lipsync-calibrator/issues"
+  },
+  "keywords": [
+    "lipsync",
+    "3d model",
+    "threejs"
+  ],
+  "scripts": {
+    "start": "yarn run set-env:prod && react-scripts start",
+    "start:dev": "yarn run set-env:dev && react-scripts start",
+    "set-env:prod": "node update-env.js prod",
+    "set-env:dev": "node update-env.js dev",
+    "build": "react-scripts build",
+    "build:delivery": "yarn run format && yarn run lint:fix && react-scripts build",
+    "serve": "serve -s build",
+    "check-deps": "yarn outdated",
+    "upgrade-deps": "yarn upgrade --latest",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,scss}\"",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@emotion/react": "11.11.4",
+    "@emotion/styled": "11.11.5",
+    "@fontsource/roboto": "5.0.13",
+    "@material-ui/core": "4.12.4",
+    "@material-ui/icons": "4.11.3",
+    "@mui/icons-material": "5.15.18",
+    "@mui/material": "5.15.18",
+    "@reduxjs/toolkit": "2.2.5",
+    "@types/node": "20.12.12",
+    "@types/react": "18.3.2",
+    "@types/react-dom": "18.3.0",
+    "@types/three": "0.164.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-redux": "9.1.2",
+    "react-scripts": "5.0.1",
+    "serve": "14.2.3",
+    "three": "0.164.1",
+    "typescript": "5.4.5"
+  },
+  "devDependencies": {
+    "@types/react-redux": "7.1.33",
+    "dotenv": "16.4.5",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-config-standard-with-typescript": "43.0.1",
+    "eslint-import-resolver-typescript": "3.6.1",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-prettier": "5.1.3",
+    "eslint-plugin-unused-imports": "3.2.0",
+    "fs": "0.0.1-security",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.2",
+    "path": "0.12.7",
+    "prettier": "3.2.5"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
