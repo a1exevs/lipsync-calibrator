@@ -55,6 +55,12 @@ Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 The build is minified and the filenames include the hashes.\
 
+### `yarn run build:delivery`
+Prepares your React app for production by formatting code, fixing lint errors, and creating an optimized build.
+1. Formatting: Runs yarn run format.
+2. Linting: Executes yarn run lint:fix.
+3. Production Build: Uses react-scripts build for a minified, optimized bundle.
+
 ### `yarn run check-deps`
 ### `yarn run upgrade-deps`
 Checks/updates available dependencies to the latest version.
