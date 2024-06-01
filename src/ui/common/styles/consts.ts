@@ -8,7 +8,8 @@ export const spaceSuperSmall = 1;
 export const spaceExtraSmall = 2;
 export const spaceSmall = 3;
 
-export const borderSuperSmall = '1px';
+export const borderSuperSmallPx = 1;
+export const borderSuperSmall = `${borderSuperSmallPx}px`;
 
 export const flexGrowNormal = 1;
 
