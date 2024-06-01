@@ -17,16 +17,19 @@ import {
   ThreeDModelViewerDriver,
 } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 import {
+  cameraAspect,
   cameraFar,
   cameraFOV,
   cameraLookAtPosition,
   cameraNear,
   cameraPosition,
-  camwraAspect,
   lightColor,
   lightIntensity,
   lightPosition,
   modelPosition,
+  rotateXAngle,
+  rotateYAngle,
+  rotateZAngle,
 } from 'src/ui/app-content/content/three-d-model-viewer/drivers/fbx-driver/fbx-driver.consts';
 import {
   getSelectedAnimation,
@@ -37,7 +40,7 @@ import { windowMinWidth } from 'src/ui/common/styles/consts';
 export const fbxDriver: ThreeDModelViewerDriver = {
   getLoader: () => ThreeDModelFileLoaderFactory.create(SupportedThreeDModelExtension.FBX),
   getConfiguredCamera: (): PerspectiveCamera => {
-    const camera = new PerspectiveCamera(cameraFOV, camwraAspect, cameraNear, cameraFar);
+    const camera = new PerspectiveCamera(cameraFOV, cameraAspect, cameraNear, cameraFar);
     camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
     camera.lookAt(new Vector3(cameraLookAtPosition.x, cameraLookAtPosition.y, cameraLookAtPosition.z));
     return camera;
@@ -49,8 +52,9 @@ export const fbxDriver: ThreeDModelViewerDriver = {
   },
   setModelToScene: (object: Group, scene: Scene) => {
     object.position.set(modelPosition.x, modelPosition.y, modelPosition.z);
-    object.rotateZ(Math.PI / 12);
-    object.rotateX(Math.PI);
+    object.rotateX(rotateXAngle);
+    object.rotateY(rotateYAngle);
+    object.rotateZ(rotateZAngle);
     scene.add(object);
   },
   getScene: (light: Light<LightShadow>) => {
