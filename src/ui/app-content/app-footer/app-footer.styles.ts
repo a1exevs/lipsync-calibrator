@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+import { appFooterVPaddingPx } from 'src/ui/app-content/app-footer/app-footer.consts';
 import { MUISpacePx } from 'src/ui/common/styles/consts';
 
 const useClasses = makeStyles(() => ({
@@ -7,7 +8,7 @@ const useClasses = makeStyles(() => ({
     position: 'fixed',
     width: '100%',
     bottom: 0,
-    padding: `${MUISpacePx}px 0 ${MUISpacePx}px ${MUISpacePx * 3}px`,
+    padding: `${appFooterVPaddingPx}px ${MUISpacePx * 3}px`,
   },
 }));
 

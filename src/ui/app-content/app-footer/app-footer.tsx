@@ -15,8 +15,8 @@ const AppFooter: React.FC<Props> = ({ showBackButton, onBackButtonClick }) => {
   const classes = useClasses();
 
   return (
-    <footer className={classes.appFooter}>
-      <MUIBox>
+    <MUIBox className={classes.appFooter}>
+      <footer>
         {showBackButton && (
           <Button
             onClick={onBackButtonClick}
@@ -28,8 +28,8 @@ const AppFooter: React.FC<Props> = ({ showBackButton, onBackButtonClick }) => {
             {currentLang.labels.BACK_BTN}
           </Button>
         )}
-      </MUIBox>
-    </footer>
+      </footer>
+    </MUIBox>
   );
 };
 
