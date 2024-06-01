@@ -19,9 +19,9 @@ const ErrorProvider: React.FC<Props> = ({ children }) => {
   };
 
   const resetError: ResetErrorFn = () => {
-    _setError(null);
+    setShow(false);
     setTimeout(() => {
-      setShow(false);
+      _setError(null);
     }, DEFAULT_SMALL_DELAY);
   };
 
