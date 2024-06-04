@@ -1,8 +1,6 @@
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import { Button, Typography } from '@mui/material';
 import React, { useRef, useState } from 'react';
-import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 import { getExtensionByFile } from 'src/common/helpers/file';
 import { isEmpty, isUndefined } from 'src/common/helpers/guards';
@@ -67,7 +65,7 @@ const FileUploader: React.FC<Props> = ({
         throw new Error(currentLang.errors.MODEL_FILE_EXTENSION_IS_NOT_SUPPORTED);
       }
 
-      const loader = ThreeDModelFileLoaderFactory.create<FBXLoader | GLTFLoader>(fileExtension);
+      const loader = ThreeDModelFileLoaderFactory.create(fileExtension);
       const model = await loader.loadAsync(URL.createObjectURL(file), event =>
         setProgress(calculatePercentage(event.loaded, event.total)),
       );

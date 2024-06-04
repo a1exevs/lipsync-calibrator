@@ -1,5 +1,6 @@
 import { AnimationMixer, Group, Light, Loader, Scene, WebGLRenderer } from 'three';
-import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
+import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Camera } from 'three/src/cameras/Camera';
 import { LightShadow } from 'three/src/lights/LightShadow';
 
@@ -11,6 +12,8 @@ export enum SupportedThreeDModelExtension {
 }
 
 export type ThreeDModel = Group | GLTF;
+
+export type ThreeDModelLoader = FBXLoader | GLTFLoader;
 
 export type ThreeDModelViewerDriver<T = ThreeDModel> = {
   getLoader: () => Loader<T>;
