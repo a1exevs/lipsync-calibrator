@@ -1,18 +1,21 @@
 import React, { useEffect, useRef } from 'react';
-import { AnimationMixer, Clock, Group, Scene, WebGLRenderer } from 'three';
+import { AnimationMixer, Clock, Scene, WebGLRenderer } from 'three';
 import { Camera } from 'three/src/cameras/Camera';
 
 import { isNull } from 'src/common/helpers/guards';
 import { Nullable } from 'src/common/types/common';
 import { ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-context/error.types';
 import { getDriverByFileExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map';
-import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
+import {
+  SupportedThreeDModelExtension,
+  ThreeDModel,
+} from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 import useClasses from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.styles';
 import MUIPaper from 'src/ui/common/components/mui-paper/mui-paper';
 import { elevationNormal } from 'src/ui/common/styles/consts';
 
 type Props = {
-  model: Nullable<Group>;
+  model: Nullable<ThreeDModel>;
   modelExtension: Nullable<SupportedThreeDModelExtension>;
   selectedAnimationUUID: Nullable<string>;
   setError: SetErrorFn;
@@ -58,7 +61,7 @@ const ThreeDModelViewer: React.FC<Props> = ({
   };
 
   const init = (
-    threeDModel: Nullable<Group>,
+    threeDModel: Nullable<ThreeDModel>,
     uuid: Nullable<string>,
   ): Nullable<{ renderer: WebGLRenderer; mixer: AnimationMixer; clock: Clock; scene: Scene; camera: Camera }> => {
     if (isNull(modelExtension) || isNull(threeDModel)) {

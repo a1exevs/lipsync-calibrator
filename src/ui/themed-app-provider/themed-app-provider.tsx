@@ -11,6 +11,7 @@ type Props = {
 const ThemedAppProvider: React.FC<Props> = ({ children }) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const initialThemeMode = prefersDarkMode ? 'dark' : 'light';
+  // const initialThemeMode = prefersDarkMode ? 'light' : 'light';
   const [themeMode, setThemeMode] = useState<PaletteMode>(initialThemeMode);
 
   const colorMode = React.useMemo(

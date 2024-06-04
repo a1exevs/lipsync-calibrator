@@ -1,7 +1,8 @@
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import { Button, Typography } from '@mui/material';
 import React, { useRef, useState } from 'react';
-import { Group } from 'three';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 import { getExtensionByFile } from 'src/common/helpers/file';
 import { isEmpty, isUndefined } from 'src/common/helpers/guards';
@@ -19,11 +20,14 @@ import useClasses from 'src/ui/app-content/content/file-uploader/file-uploader.s
 import { getAvailableAnimationListByModel } from 'src/ui/app-content/content/file-uploader/helpers/animations-data-reader.helper';
 import { ThreeDModelFileLoaderFactory } from 'src/ui/app-content/content/file-uploader/helpers/file-loaders.factory';
 import { isThreeDModelExtensionSupported } from 'src/ui/app-content/content/file-uploader/helpers/supported-three-d-model-extensions.helper';
-import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
+import {
+  SupportedThreeDModelExtension,
+  ThreeDModel,
+} from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 import MUIBox from 'src/ui/common/components/mui-box/mui-box';
 
 type Props = {
-  setThreeDModel: (_: Group) => void;
+  setThreeDModel: (_: ThreeDModel) => void;
   setThreeDModelExtension: (_: SupportedThreeDModelExtension) => void;
   setAvailableAnimationList: (animations: AnimationItem[]) => void;
   setError: SetErrorFn;
@@ -63,7 +67,7 @@ const FileUploader: React.FC<Props> = ({
         throw new Error(currentLang.errors.MODEL_FILE_EXTENSION_IS_NOT_SUPPORTED);
       }
 
-      const loader = ThreeDModelFileLoaderFactory.create(fileExtension);
+      const loader = ThreeDModelFileLoaderFactory.create<FBXLoader | GLTFLoader>(fileExtension);
       const model = await loader.loadAsync(URL.createObjectURL(file), event =>
         setProgress(calculatePercentage(event.loaded, event.total)),
       );

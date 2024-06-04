@@ -1,11 +1,11 @@
 import { createContext } from 'react';
-import { Group } from 'three';
 
 import { Nullable } from 'src/common/types/common';
+import { ThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 
 export const ThreeDModelContext = createContext<{
-  threeDModel: Nullable<Group>;
-  setThreeDModel: (_: Nullable<Group>) => void;
+  threeDModel: Nullable<ThreeDModel>;
+  setThreeDModel: (_: Nullable<ThreeDModel>) => void;
 }>({
   threeDModel: null,
   setThreeDModel: () => {},
