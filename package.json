@@ -14,13 +14,13 @@
     "threejs"
   ],
   "scripts": {
-    "start": "yarn run set-env:prod && react-scripts start",
-    "start:dev": "yarn run set-env:dev && react-scripts start",
+    "start": "yarn run set-env:prod && react-app-rewired start",
+    "start:dev": "yarn run set-env:dev && react-app-rewired start",
     "set-env:prod": "node update-env.js prod",
     "set-env:dev": "node update-env.js dev",
-    "build": "set PUBLIC_URL= && react-scripts build",
+    "build": "set PUBLIC_URL= && react-app-rewired build",
     "build:delivery": "yarn run format && yarn run lint:fix && yarn run build",
-    "build:prod": "react-scripts build",
+    "build:prod": "react-app-rewired build",
     "predeploy": "yarn run format && yarn run lint:fix && yarn run build:prod",
     "deploy": "gh-pages -d build",
     "serve": "serve -s build",
@@ -67,7 +67,9 @@
     "husky": "9.0.11",
     "lint-staged": "15.2.2",
     "path": "0.12.7",
-    "prettier": "3.2.5"
+    "prettier": "3.2.5",
+    "react-app-rewired": "2.2.1",
+    "webpack-bundle-analyzer": "4.10.2"
   },
   "browserslist": {
     "production": [
