@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import React from 'react';
 
 import { appFooterHeightPx } from 'src/ui/app-content/app-footer/app-footer.consts';
-import { windowMinWidth } from 'src/ui/common/styles/consts';
+import { windowMinWidth } from 'src/ui/shared/styles/consts';
 
 const AppContainer = styled((props: ContainerProps) => <Container {...props} />)(({ theme }) => ({
   display: 'flex',

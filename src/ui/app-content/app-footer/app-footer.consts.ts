@@ -1,4 +1,4 @@
-import { borderSuperSmallPx, MUISpacePx } from 'src/ui/common/styles/consts';
+import { borderSuperSmallPx, MUISpacePx } from 'src/ui/shared/styles/consts';
 
 export const appFooterVPaddingPx = MUISpacePx;
 

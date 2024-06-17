@@ -7,7 +7,7 @@ import AnimationCard from 'src/ui/app-content/content/animation-list/animation-c
 import { durationNumOfChars } from 'src/ui/app-content/content/animation-list/animation-list.consts';
 import useClasses from 'src/ui/app-content/content/animation-list/animation-list.styles';
 import { AnimationItem } from 'src/ui/app-content/content/animation-list/animation-list.types';
-import MUIBox from 'src/ui/common/components/mui-box/mui-box';
+import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 
 type Props = {
   availableAnimations: AnimationItem[];

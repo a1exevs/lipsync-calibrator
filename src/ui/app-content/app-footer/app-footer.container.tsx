@@ -11,7 +11,7 @@ import {
 } from 'src/store/slices/app/app.slice';
 import AppFooter from 'src/ui/app-content/app-footer/app-footer';
 import { useThreeDModel } from 'src/ui/app-content/content/three-d-model-context/use-three-d-model';
-import { useAppDispatch, useAppSelector } from 'src/ui/common/hooks/store-hooks';
+import { useAppDispatch, useAppSelector } from 'src/ui/shared/hooks/store-hooks';
 
 const AppFooterContainer: React.FC = () => {
   const step = useAppSelector(appStep);

@@ -28,7 +28,7 @@ import {
   getSelectedAnimation,
   stopAllAnimationsForMixer,
 } from 'src/ui/app-content/content/three-d-model-viewer/drivers/gltf-driver/gltf-driver.helpers';
-import { windowMinWidth } from 'src/ui/common/styles/consts';
+import { windowMinWidth } from 'src/ui/shared/styles/consts';
 
 export const gltfDriver: ThreeDModelViewerDriver<GLTF> = {
   getLoader: () => ThreeDModelFileLoaderFactory.create(SupportedThreeDModelExtension.FBX),

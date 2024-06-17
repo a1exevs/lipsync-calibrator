@@ -1,4 +1,4 @@
-import { MUISpacePx } from 'src/ui/common/styles/consts';
+import { MUISpacePx } from 'src/ui/shared/styles/consts';
 
 export const cardHSpacePx = 2 * MUISpacePx;
 

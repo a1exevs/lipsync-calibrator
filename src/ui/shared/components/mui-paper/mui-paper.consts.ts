@@ -1,4 +1,4 @@
-import { MUISpacePx, spaceExtraSmall, spaceSuperSmall } from 'src/ui/common/styles/consts';
+import { MUISpacePx, spaceExtraSmall, spaceSuperSmall } from 'src/ui/shared/styles/consts';
 
 export const GENERIC_PAPER_MARGIN = spaceExtraSmall;
 export const GENERIC_PAPER_PADDING = spaceSuperSmall;

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import { flexGrowNormal, MUISpacePx } from 'src/ui/common/styles/consts';
+import { flexGrowNormal, MUISpacePx } from 'src/ui/shared/styles/consts';
 
 const useClasses = makeStyles(() => ({
   appBar: {

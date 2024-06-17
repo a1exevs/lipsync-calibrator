@@ -2,7 +2,7 @@ import React from 'react';
 
 import { appStep } from 'src/store/slices/app/app.selectors';
 import Content from 'src/ui/app-content/content/content';
-import { useAppSelector } from 'src/ui/common/hooks/store-hooks';
+import { useAppSelector } from 'src/ui/shared/hooks/store-hooks';
 
 const ContentContainer: React.FC = () => {
   const step = useAppSelector(appStep);

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 import { appFooterVPaddingPx } from 'src/ui/app-content/app-footer/app-footer.consts';
-import { MUISpacePx } from 'src/ui/common/styles/consts';
+import { MUISpacePx } from 'src/ui/shared/styles/consts';
 
 const useClasses = makeStyles(() => ({
   appFooter: {

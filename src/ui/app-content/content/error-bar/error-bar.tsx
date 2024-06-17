@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ErrorType } from 'src/ui/app-content/content/error-context/error.types';
 import { useError } from 'src/ui/app-content/content/error-context/use-error';
-import MUIAlert from 'src/ui/common/components/mui-alert/mui-alert';
+import MUIAlert from 'src/ui/shared/components/mui-alert/mui-alert';
 
 const ErrorBar: React.FC = () => {
   const { error, show, resetError } = useError();
