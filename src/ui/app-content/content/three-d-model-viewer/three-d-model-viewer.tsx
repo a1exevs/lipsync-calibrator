@@ -10,7 +10,6 @@ import {
   SupportedThreeDModelExtension,
   ThreeDModel,
 } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
-import NavBarContainer from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/nav-bar.container';
 import useClasses from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.styles';
 import MUIPaper from 'src/ui/shared/components/mui-paper/mui-paper';
 import { elevationNormal } from 'src/ui/shared/styles/consts';
@@ -167,7 +166,6 @@ const ThreeDModelViewer: React.FC<Props> = ({
   return (
     <MUIPaper className={classes.threeDModelViewer} elevation={elevationNormal}>
       <div ref={mountRef} />
-      <NavBarContainer />
     </MUIPaper>
   );
 };
