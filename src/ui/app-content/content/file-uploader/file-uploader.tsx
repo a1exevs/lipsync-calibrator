@@ -106,7 +106,7 @@ const FileUploader: React.FC<Props> = ({
         startIcon={<UploadFileOutlinedIcon />}
         onClick={() => threeDModelfileInputRef.current?.click()}
       >
-        {currentLang.labels.UPLOAD_FILE_BTN}
+        {currentLang.labels.UPLOAD_MODEL}
       </Button>
       <Typography variant="body1" align="center">
         {interpolateStrings(currentLang.messages.SUPPORTED_FORMATS, String(supportedThreeDModelFormats))}
