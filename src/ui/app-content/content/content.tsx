@@ -10,7 +10,7 @@ import ThreeDModelProvider from 'src/ui/app-content/content/three-d-model-contex
 import ThreeDModelViewerContainer from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.container';
 import UIBlocker from 'src/ui/app-content/content/ui-blocker/ui-blocker';
 import UIBlockerProvider from 'src/ui/app-content/content/ui-blocker-context/ui-blocker.provider';
-import MUIBox from 'src/ui/common/components/mui-box/mui-box';
+import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 
 type Props = {
   step: AppStep;

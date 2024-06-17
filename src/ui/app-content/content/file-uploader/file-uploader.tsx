@@ -22,7 +22,7 @@ import {
   SupportedThreeDModelExtension,
   ThreeDModel,
 } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
-import MUIBox from 'src/ui/common/components/mui-box/mui-box';
+import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 
 type Props = {
   setThreeDModel: (_: ThreeDModel) => void;

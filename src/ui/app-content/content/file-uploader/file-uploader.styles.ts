@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import { MUISpacePx } from 'src/ui/common/styles/consts';
+import { MUISpacePx } from 'src/ui/shared/styles/consts';
 
 const useClasses = makeStyles(() => ({
   fileUploader: {

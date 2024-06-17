@@ -4,7 +4,7 @@ import {
   cardHSpacePx,
   maxWidthPercent,
 } from 'src/ui/app-content/content/animation-list/animation-card/animation-card.consts';
-import { cbLikeEaseInOut, durationSmall, MUISpacePx, opacityMedium } from 'src/ui/common/styles/consts';
+import { cbLikeEaseInOut, durationSmall, MUISpacePx, opacityMedium } from 'src/ui/shared/styles/consts';
 
 const useClasses = makeStyles(() => ({
   animationCard: {

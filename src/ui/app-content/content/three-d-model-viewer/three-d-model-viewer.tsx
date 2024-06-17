@@ -11,8 +11,8 @@ import {
   ThreeDModel,
 } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 import useClasses from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.styles';
-import MUIPaper from 'src/ui/common/components/mui-paper/mui-paper';
-import { elevationNormal } from 'src/ui/common/styles/consts';
+import MUIPaper from 'src/ui/shared/components/mui-paper/mui-paper';
+import { elevationNormal } from 'src/ui/shared/styles/consts';
 
 type Props = {
   model: Nullable<ThreeDModel>;

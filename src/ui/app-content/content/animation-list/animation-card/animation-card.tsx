@@ -6,9 +6,9 @@ import { capitalize, interpolateStrings } from 'src/common/helpers/string';
 import { currentLang } from 'src/common/land/lang.helper';
 import useClasses from 'src/ui/app-content/content/animation-list/animation-card/animation-card.styles';
 import { calculateAnimationCardRightBlockWidth } from 'src/ui/app-content/content/animation-list/animation-card/animation.card.helpers';
-import MUIBox from 'src/ui/common/components/mui-box/mui-box';
-import MUIPaper from 'src/ui/common/components/mui-paper/mui-paper';
-import { elevationNormal, textOverflowEllipsis } from 'src/ui/common/styles/consts';
+import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
+import MUIPaper from 'src/ui/shared/components/mui-paper/mui-paper';
+import { elevationNormal, textOverflowEllipsis } from 'src/ui/shared/styles/consts';
 
 type Props = {
   name: string;

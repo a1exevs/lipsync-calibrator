@@ -4,7 +4,7 @@ import React from 'react';
 
 import { currentLang } from 'src/common/land/lang.helper';
 import useClasses from 'src/ui/app-content/app-footer/app-footer.styles';
-import MUIBox from 'src/ui/common/components/mui-box/mui-box';
+import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 
 type Props = {
   showBackButton: boolean;

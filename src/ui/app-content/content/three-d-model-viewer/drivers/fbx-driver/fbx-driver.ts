@@ -36,7 +36,7 @@ import {
   getSelectedAnimation,
   stopAllAnimationsForMixer,
 } from 'src/ui/app-content/content/three-d-model-viewer/drivers/fbx-driver/fbx-driver.helpers';
-import { windowMinWidth } from 'src/ui/common/styles/consts';
+import { windowMinWidth } from 'src/ui/shared/styles/consts';
 
 export const fbxDriver: ThreeDModelViewerDriver<Group> = {
   getLoader: () => ThreeDModelFileLoaderFactory.create<FBXLoader>(SupportedThreeDModelExtension.FBX),

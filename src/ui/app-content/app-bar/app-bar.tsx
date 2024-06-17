@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import React from 'react';
 
 import useClasses from 'src/ui/app-content/app-bar/app-bar.styles';
-import MUIBox from 'src/ui/common/components/mui-box/mui-box';
+import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 
 type Props = {
   title: string;
