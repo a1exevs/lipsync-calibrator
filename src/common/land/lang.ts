@@ -4,7 +4,9 @@ export type LanguageCode = (typeof languageCodes)[number];
 
 const enLabels = {
   APP_NAME: 'Lipsync calibrator',
-  UPLOAD_FILE_BTN: 'Select model',
+  UPLOAD_MODEL: 'Select model',
+  UPLOAD_JSON: 'Upload JSON file',
+  DOWNLOAD_JSON: 'Download JSON file',
   BACK_BTN: 'BACK',
   DURATION: 'Duration: {0} s',
   AVAILABLE_ANIMATIONS: 'Available animations',
