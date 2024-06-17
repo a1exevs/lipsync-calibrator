@@ -7,7 +7,7 @@ Application for calibrating viseme 3D models.
 v1.22.19
 
 ## Node version
-v18.17.1. Use NVM:
+v20.9.0. Use NVM:
 1. nvm current - check current version of Node
 2. nvm list - show list of available Node versions
 3. nvm install <version> - to install and use Node version.
