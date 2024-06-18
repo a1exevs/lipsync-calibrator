@@ -16,6 +16,7 @@ const enMessages = {
   SUPPORTED_FORMATS: `Supported formats: {0}.`,
   THIS_APP_FOR_CALIBRATE: `This application is for calibrating 3D model visemes.`,
   SELECT_THREE_D_FILE: `First, let's select the 3D model file you need.`,
+  DOWNLOAD_JSON_NOT_AVAILABLE: '“Download JSON File” will be available after you import the JSON file.',
 };
 
 const enErrors = {
