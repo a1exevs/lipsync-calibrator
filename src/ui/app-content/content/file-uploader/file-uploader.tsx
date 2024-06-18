@@ -22,6 +22,7 @@ import {
   SupportedThreeDModelExtension,
   ThreeDModel,
 } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
+import FileInput from 'src/ui/shared/components/file-input/file-input';
 import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 
 type Props = {
@@ -94,12 +95,10 @@ const FileUploader: React.FC<Props> = ({
       <Typography variant="body1" color="inherit" align="center">
         {currentLang.messages.THIS_APP_FOR_CALIBRATE} <br /> {currentLang.messages.SELECT_THREE_D_FILE}
       </Typography>
-      <input
-        type="file"
-        accept={threeDModelUploaderAccept}
-        onChange={handleThreeDModelFileChange}
+      <FileInput
         ref={threeDModelfileInputRef}
-        style={{ display: 'none' }}
+        accept={threeDModelUploaderAccept}
+        handleFileUpload={handleThreeDModelFileChange}
       />
       <Button
         variant="contained"
