@@ -14,6 +14,7 @@ import {
   jsonFileUploaderAccept,
 } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/nav-bar.consts';
 import useClasses from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/nav-bar.styles';
+import { validateSelectedJSONStructure } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator';
 import FileInput from 'src/ui/shared/components/file-input/file-input';
 import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 
@@ -61,10 +62,12 @@ const NavBar: React.FC<Props> = ({ allowToExportToJSON, setError, resetError, bl
         setError(currentLang.errors.ERROR_LOADING_JSON, 'error');
         resetAndUnblock(event);
       };
-      reader.onload = _ => {
+      reader.onload = e => {
         try {
-          // const json = JSON.parse(e.target?.result as string);
-          // TODO Validate JSON structure
+          const { isValid, error } = validateSelectedJSONStructure(e.target?.result);
+          if (!isValid) {
+            throw new Error(error);
+          }
           resetError();
         } catch (e) {
           if (e instanceof Error) {

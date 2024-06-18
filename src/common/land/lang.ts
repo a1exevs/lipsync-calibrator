@@ -1,4 +1,5 @@
 import { languageCodes } from 'src/common/land/lang.consts';
+import { jsonStructureExample } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.consts';
 
 export type LanguageCode = (typeof languageCodes)[number];
 
@@ -31,6 +32,8 @@ const enErrors = {
   SELECTED_FILE_IS_NOT_JSON: 'Invalid file: Please choose a file with a .json extension.',
   ERROR_LOADING_JSON:
     'Error loading JSON file: Please ensure the file has a valid .json extension and is formatted correctly.',
+  INCORRECT_JSON_FILE_STRUCTURE: `JSON file does not comply with the required structure. Example: ${JSON.stringify(jsonStructureExample)}.`,
+  ERRORS: 'Errors: {0}.',
 };
 
 export type LanguageConstants = {
