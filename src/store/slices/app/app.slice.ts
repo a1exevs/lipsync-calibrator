@@ -52,6 +52,10 @@ const appSlice = createSlice({
       state.morphTargetData = payload.data;
       state.allowToExportToJSON = !isEmpty(payload.data);
     },
+    resetMorphTargetData(state): void {
+      state.morphTargetData = null;
+      state.allowToExportToJSON = false;
+    },
   },
 });
 export const {
@@ -65,6 +69,7 @@ export const {
   setSelectedAnimationUUID,
   resetSelectedAnimationUUID,
   setMorphTargetData,
+  resetMorphTargetData,
 } = appSlice.actions;
 
 export const APP_SLICE_NAME = appSlice.name;
