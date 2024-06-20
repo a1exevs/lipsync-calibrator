@@ -3,12 +3,8 @@ import React from 'react';
 import { AppStep } from 'src/common/types/app';
 import { isFirstStep } from 'src/store/slices/app/app.helpers';
 import { appStep } from 'src/store/slices/app/app.selectors';
-import {
-  previousStep,
-  resetAvailableAnimationList,
-  resetSelectedAnimationUUID,
-  resetThreeDModelExtension,
-} from 'src/store/slices/app/app.slice';
+import { previousStep, resetSelectedAnimationUUID } from 'src/store/slices/app/app.slice';
+import { resetAnimationListStepState } from 'src/store/slices/app/app.thunks';
 import AppFooter from 'src/ui/app-content/app-footer/app-footer';
 import { useThreeDModel } from 'src/ui/app-content/content/three-d-model-context/use-three-d-model';
 import { useAppDispatch, useAppSelector } from 'src/ui/shared/hooks/store-hooks';
@@ -24,8 +20,7 @@ const AppFooterContainer: React.FC = () => {
     }
     if (step === AppStep.ANIMATION_LIST_STEP) {
       setThreeDModel(null);
-      dispatch(resetAvailableAnimationList());
-      dispatch(resetThreeDModelExtension());
+      dispatch(resetAnimationListStepState());
     }
     if (step === AppStep.THREE_D_MODEL_VIEWER_STEP) {
       dispatch(resetSelectedAnimationUUID());
