@@ -4,11 +4,13 @@ import { AnimationItem } from 'src/ui/app-content/content/animation-list/animati
 import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
 import { Shape } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
 
+export type MorphTargetData = { data: Shape[]; fileName: string };
+
 export type AppState = {
   appStep: AppStep;
   threeDModelExtension: Nullable<SupportedThreeDModelExtension>;
   availableAnimationList: AnimationItem[];
   selectedAnimationUUID: Nullable<string>;
   allowToExportToJSON: boolean;
-  morphTargetData: Shape[];
+  morphTargetData: Nullable<MorphTargetData>;
 };

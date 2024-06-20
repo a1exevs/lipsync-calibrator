@@ -4,9 +4,9 @@ import { isEmpty } from 'src/common/helpers/guards';
 import { APP_STEPS } from 'src/store/slices/app/app.consts';
 import { getAppStepIndex } from 'src/store/slices/app/app.helpers';
 import { initialState } from 'src/store/slices/app/app.initial-state';
+import { MorphTargetData } from 'src/store/slices/app/app.types';
 import { AnimationItem } from 'src/ui/app-content/content/animation-list/animation-list.types';
 import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
-import { Shape } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
 
 const appSlice = createSlice({
   name: 'app',
@@ -48,7 +48,7 @@ const appSlice = createSlice({
     resetSelectedAnimationUUID(state): void {
       state.selectedAnimationUUID = null;
     },
-    setMorphTargetData(state, { payload }: PayloadAction<{ data: Shape[] }>): void {
+    setMorphTargetData(state, { payload }: PayloadAction<{ data: MorphTargetData }>): void {
       state.morphTargetData = payload.data;
       state.allowToExportToJSON = !isEmpty(payload.data);
     },
