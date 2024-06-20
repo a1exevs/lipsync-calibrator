@@ -15,6 +15,7 @@ import {
 } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/nav-bar.consts';
 import useClasses from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/nav-bar.styles';
 import { validateSelectedJSONStructure } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator';
+import { Shape } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
 import FileInput from 'src/ui/shared/components/file-input/file-input';
 import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 
@@ -24,9 +25,17 @@ type Props = {
   unblockUI: () => void;
   setError: SetErrorFn;
   resetError: ResetErrorFn;
+  setMorphTargetData: (shapeData: Shape[]) => void;
 };
 
-const NavBar: React.FC<Props> = ({ allowToExportToJSON, setError, resetError, blockUI, unblockUI }) => {
+const NavBar: React.FC<Props> = ({
+  allowToExportToJSON,
+  setError,
+  resetError,
+  blockUI,
+  unblockUI,
+  setMorphTargetData,
+}) => {
   // TODO Export to JSON button click handler
   const classes = useClasses();
 
@@ -64,10 +73,11 @@ const NavBar: React.FC<Props> = ({ allowToExportToJSON, setError, resetError, bl
       };
       reader.onload = e => {
         try {
-          const { isValid, error } = validateSelectedJSONStructure(e.target?.result);
+          const { isValid, error, data } = validateSelectedJSONStructure(e.target?.result);
           if (!isValid) {
             throw new Error(error);
           }
+          setMorphTargetData(data);
           resetError();
         } catch (e) {
           if (e instanceof Error) {

@@ -6,4 +6,6 @@ export const initialState: AppState = {
   threeDModelExtension: null,
   availableAnimationList: [],
   selectedAnimationUUID: null,
+  allowToExportToJSON: false,
+  morphTargetData: [],
 };

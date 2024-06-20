@@ -12,7 +12,7 @@ export function validateSelectedJSONStructure(shapeDataStr: Nillable<string | Ar
     const validateFn = new Ajv().compile(jsonShapesDataStructureScheme);
     const baseErrorMessage = currentLang.errors.INCORRECT_JSON_FILE_STRUCTURE;
     if (isNil(shapeDataStr)) {
-      return { isValid: false, error: baseErrorMessage };
+      return { isValid: false, error: baseErrorMessage, data: [] };
     }
     const shapeData = JSON.parse(shapeDataStr as string);
     const valid = validateFn(shapeData);
@@ -22,13 +22,13 @@ export function validateSelectedJSONStructure(shapeDataStr: Nillable<string | Ar
         ? interpolateStrings(` ${currentLang.errors.ERRORS}`, error)
         : '';
 
-      return { isValid: false, error: baseErrorMessage + additionalErrorMessage };
+      return { isValid: false, error: baseErrorMessage + additionalErrorMessage, data: [] };
     }
-    return { isValid: true };
+    return { isValid: true, data: shapeData };
   } catch (e) {
     if (e instanceof Error) {
-      return { isValid: false, error: e?.message };
+      return { isValid: false, error: e?.message, data: [] };
     }
-    return { isValid: false };
+    return { isValid: false, data: [] };
   }
 }

@@ -10,5 +10,6 @@ export type Shape = {
 
 export type ValidatorOutput = {
   isValid: boolean;
+  data: Shape[];
   error?: string;
 };
