@@ -4,18 +4,19 @@ import { Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import React, { useRef } from 'react';
 
-import { getExtensionByFile } from 'src/common/helpers/file';
-import { isUndefined } from 'src/common/helpers/guards';
+import { getFileData } from 'src/common/helpers/file';
+import { isNull, isUndefined } from 'src/common/helpers/guards';
 import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
+import { MorphTargetData } from 'src/store/slices/app/app.types';
 import { ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-context/error.types';
 import {
+  jsonFileDownloadPostfix,
   jsonFileExtension,
   jsonFileUploaderAccept,
 } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/nav-bar.consts';
 import useClasses from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/nav-bar.styles';
 import { validateSelectedJSONStructure } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator';
-import { Shape } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
 import FileInput from 'src/ui/shared/components/file-input/file-input';
 import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 
@@ -25,7 +26,8 @@ type Props = {
   unblockUI: () => void;
   setError: SetErrorFn;
   resetError: ResetErrorFn;
-  setMorphTargetData: (shapeData: Shape[]) => void;
+  morphTargetData: Nullable<MorphTargetData>;
+  setMorphTargetData: (shapeData: MorphTargetData) => void;
 };
 
 const NavBar: React.FC<Props> = ({
@@ -35,6 +37,7 @@ const NavBar: React.FC<Props> = ({
   blockUI,
   unblockUI,
   setMorphTargetData,
+  morphTargetData,
 }) => {
   // TODO Export to JSON button click handler
   const classes = useClasses();
@@ -60,8 +63,8 @@ const NavBar: React.FC<Props> = ({
       if (isUndefined(file) || !file.size) {
         throw new Error(currentLang.errors.INVALID_FILE);
       }
-      const fileExtension = getExtensionByFile(file);
-      if (fileExtension !== jsonFileExtension) {
+      const { fileName, extension } = getFileData(file);
+      if (extension !== jsonFileExtension) {
         throw new Error(currentLang.errors.SELECTED_FILE_IS_NOT_JSON);
       }
 
@@ -77,7 +80,7 @@ const NavBar: React.FC<Props> = ({
           if (!isValid) {
             throw new Error(error);
           }
-          setMorphTargetData(data);
+          setMorphTargetData({ data, fileName });
           resetError();
         } catch (e) {
           if (e instanceof Error) {
@@ -97,6 +100,20 @@ const NavBar: React.FC<Props> = ({
     }
   };
 
+  const handleDwonloadJSONButtonClick = (): void => {
+    if (isNull(morphTargetData)) {
+      return;
+    }
+    const jsonStr = JSON.stringify(morphTargetData.data, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${morphTargetData.fileName}${jsonFileDownloadPostfix}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <MUIBox className={classes.navBar}>
       <IconButton onClick={handleUploadJSONButtonClick} title={currentLang.labels.UPLOAD_JSON} color="inherit">
@@ -109,6 +126,7 @@ const NavBar: React.FC<Props> = ({
             title={getDownloadButtonTitle(allowToExportToJSON)}
             disabled={!allowToExportToJSON}
             color="inherit"
+            onClick={handleDwonloadJSONButtonClick}
           >
             <DownloadForOfflineRoundedIcon />
           </IconButton>
