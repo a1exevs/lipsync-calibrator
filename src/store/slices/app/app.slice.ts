@@ -65,7 +65,6 @@ export const {
   setSelectedAnimationUUID,
   resetSelectedAnimationUUID,
   setMorphTargetData,
-  resetMorphTargetData,
 } = appSlice.actions;
 
 export const APP_SLICE_NAME = appSlice.name;
