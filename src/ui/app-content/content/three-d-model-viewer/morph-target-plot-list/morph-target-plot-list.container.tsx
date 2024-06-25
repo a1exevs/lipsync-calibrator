@@ -5,7 +5,7 @@ import MorphTargetPlotList from 'src/ui/app-content/content/three-d-model-viewer
 const MorphTargetPlotListContainer: React.FC = () => {
   // TODO Implement
 
-  return <MorphTargetPlotList />;
+  return <MorphTargetPlotList morphTargetData={null} />;
 };
 
 export default MorphTargetPlotListContainer;
