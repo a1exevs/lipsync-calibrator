@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { allowToExportToJSON, morphTargetData } from 'src/store/slices/app/app.selectors';
+import { allowToExportToJSON, morphTargetDataFileName, morphTargetDataMap } from 'src/store/slices/app/app.selectors';
 import { setMorphTargetData } from 'src/store/slices/app/app.slice';
 import { MorphTargetData } from 'src/store/slices/app/app.types';
 import { useError } from 'src/ui/app-content/content/error-context/use-error';
@@ -12,7 +12,8 @@ const NavBarContainer: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const allowToExport = useAppSelector(allowToExportToJSON);
-  const morphTargets = useAppSelector(morphTargetData);
+  const morphTargetMap = useAppSelector(morphTargetDataMap);
+  const morphTargetDataFile = useAppSelector(morphTargetDataFileName);
 
   const setMorphTargetDataFromJSON = (data: MorphTargetData) => {
     dispatch(setMorphTargetData({ data }));
@@ -29,7 +30,8 @@ const NavBarContainer: React.FC = () => {
       setError={setError}
       resetError={resetError}
       setMorphTargetData={setMorphTargetDataFromJSON}
-      morphTargetData={morphTargets}
+      morphTargetDataMap={morphTargetMap}
+      morphTargetDataFileName={morphTargetDataFile}
     />
   );
 };
