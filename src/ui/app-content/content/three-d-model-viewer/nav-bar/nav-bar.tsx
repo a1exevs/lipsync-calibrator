@@ -17,6 +17,7 @@ import {
 } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/nav-bar.consts';
 import useClasses from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/nav-bar.styles';
 import { validateSelectedJSONStructure } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator';
+import { Shape } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
 import FileInput from 'src/ui/shared/components/file-input/file-input';
 import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 
@@ -26,7 +27,8 @@ type Props = {
   unblockUI: () => void;
   setError: SetErrorFn;
   resetError: ResetErrorFn;
-  morphTargetData: Nullable<MorphTargetData>;
+  morphTargetDataMap: Nullable<Record<string, Shape>>;
+  morphTargetDataFileName: Nullable<string>;
   setMorphTargetData: (shapeData: MorphTargetData) => void;
 };
 
@@ -37,7 +39,8 @@ const NavBar: React.FC<Props> = ({
   blockUI,
   unblockUI,
   setMorphTargetData,
-  morphTargetData,
+  morphTargetDataMap,
+  morphTargetDataFileName,
 }) => {
   // TODO Export to JSON button click handler
   const classes = useClasses();
@@ -100,16 +103,16 @@ const NavBar: React.FC<Props> = ({
     }
   };
 
-  const handleDwonloadJSONButtonClick = (): void => {
-    if (isNull(morphTargetData)) {
+  const handleDownloadJSONButtonClick = (): void => {
+    if (isNull(morphTargetDataMap) || isNull(morphTargetDataFileName)) {
       return;
     }
-    const jsonStr = JSON.stringify(morphTargetData.data, null, 2);
+    const jsonStr = JSON.stringify(Object.values(morphTargetDataMap), null, 2);
     const blob = new Blob([jsonStr], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${morphTargetData.fileName}${jsonFileDownloadPostfix}.json`;
+    a.download = `${morphTargetDataFileName}${jsonFileDownloadPostfix}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -126,7 +129,7 @@ const NavBar: React.FC<Props> = ({
             title={getDownloadButtonTitle(allowToExportToJSON)}
             disabled={!allowToExportToJSON}
             color="inherit"
-            onClick={handleDwonloadJSONButtonClick}
+            onClick={handleDownloadJSONButtonClick}
           >
             <DownloadForOfflineRoundedIcon />
           </IconButton>

@@ -1,4 +1,10 @@
-import { configureStore, createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  createAsyncThunk,
+  createDraftSafeSelector,
+  createDraftSafeSelectorCreator,
+  weakMapMemoize,
+} from '@reduxjs/toolkit';
 
 import appReducer, { APP_SLICE_NAME } from 'src/store/slices/app/app.slice';
 
@@ -21,5 +27,9 @@ export const createAppAsyncThunk = <InputParam = void, ReturnValues = void>(
 
 // @ts-expect-error TS(2339): Property '__store__' does not exist on type 'Windo... Remove this comment to see the full error message
 window.reactStore = store;
+
+export const createTypedDraftSafeSelector = createDraftSafeSelector.withTypes<RootState>();
+export const createWeakMapDraftSafeSelector = createDraftSafeSelectorCreator(weakMapMemoize);
+export const selectSelf = (state: RootState) => state;
 
 export default store;

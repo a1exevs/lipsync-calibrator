@@ -7,5 +7,7 @@ export const initialState: AppState = {
   availableAnimationList: [],
   selectedAnimationUUID: null,
   allowToExportToJSON: false,
-  morphTargetData: null,
+  morphTargetNames: [],
+  morphTargetDataMap: null,
+  morphTargetDataFileName: null,
 };

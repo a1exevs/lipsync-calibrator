@@ -12,5 +12,7 @@ export type AppState = {
   availableAnimationList: AnimationItem[];
   selectedAnimationUUID: Nullable<string>;
   allowToExportToJSON: boolean;
-  morphTargetData: Nullable<MorphTargetData>;
+  morphTargetNames: string[];
+  morphTargetDataMap: Nullable<Record<string, Shape>>;
+  morphTargetDataFileName: Nullable<string>;
 };

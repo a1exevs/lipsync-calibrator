@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { isEmpty } from 'src/common/helpers/guards';
+import { arrayToObject } from 'src/common/helpers/array';
+import { isEmpty, isNull } from 'src/common/helpers/guards';
 import { APP_STEPS } from 'src/store/slices/app/app.consts';
 import { getAppStepIndex } from 'src/store/slices/app/app.helpers';
 import { initialState } from 'src/store/slices/app/app.initial-state';
 import { MorphTargetData } from 'src/store/slices/app/app.types';
 import { AnimationItem } from 'src/ui/app-content/content/animation-list/animation-list.types';
 import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
+import { TimeValue } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
 
 const appSlice = createSlice({
   name: 'app',
@@ -49,12 +51,28 @@ const appSlice = createSlice({
       state.selectedAnimationUUID = null;
     },
     setMorphTargetData(state, { payload }: PayloadAction<{ data: MorphTargetData }>): void {
-      state.morphTargetData = payload.data;
+      const { data, fileName } = payload.data;
+      const morphTargetDataMap = arrayToObject(data, 'shapeName');
+      state.morphTargetNames = Object.keys(morphTargetDataMap);
+      state.morphTargetDataMap = morphTargetDataMap;
+      state.morphTargetDataFileName = fileName;
+
       state.allowToExportToJSON = !isEmpty(payload.data);
     },
     resetMorphTargetData(state): void {
-      state.morphTargetData = null;
+      state.morphTargetNames = [];
+      state.morphTargetDataMap = null;
+      state.morphTargetDataFileName = null;
+
       state.allowToExportToJSON = false;
+    },
+    updateMorphTargetData(state, { payload }: PayloadAction<{ shapeName: string; newPoints: TimeValue[] }>): void {
+      const { shapeName, newPoints } = payload;
+      const shapeToUpdate = state.morphTargetDataMap?.[shapeName] ?? null;
+      if (isNull(shapeToUpdate)) {
+        return;
+      }
+      shapeToUpdate.data = newPoints;
     },
   },
 });
@@ -70,6 +88,7 @@ export const {
   resetSelectedAnimationUUID,
   setMorphTargetData,
   resetMorphTargetData,
+  updateMorphTargetData,
 } = appSlice.actions;
 
 export const APP_SLICE_NAME = appSlice.name;
