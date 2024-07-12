@@ -1,3 +1,4 @@
+import { ConfirmProvider } from 'material-ui-confirm';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -9,7 +10,9 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <ThemedAppProvider>
-      <App />
+      <ConfirmProvider>
+        <App />
+      </ConfirmProvider>
     </ThemedAppProvider>
   </React.StrictMode>,
 );
