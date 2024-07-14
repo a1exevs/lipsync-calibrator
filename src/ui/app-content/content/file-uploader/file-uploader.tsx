@@ -3,7 +3,7 @@ import { Button, Typography } from '@mui/material';
 import React, { useRef, useState } from 'react';
 
 import { getExtensionByFile } from 'src/common/helpers/file';
-import { isEmpty, isUndefined } from 'src/common/helpers/guards';
+import { isUndefined } from 'src/common/helpers/guards';
 import { calculatePercentage } from 'src/common/helpers/number';
 import { interpolateStrings } from 'src/common/helpers/string';
 import { currentLang } from 'src/common/land/lang.helper';
@@ -70,9 +70,6 @@ const FileUploader: React.FC<Props> = ({
       const model = await loader.loadAsync(URL.createObjectURL(file), event =>
         setProgress(calculatePercentage(event.loaded, event.total)),
       );
-      if (isEmpty(model.animations)) {
-        // throw new Error(currentLang.errors.MODEL_DOES_NOT_CONTAIN_ANIMATIONS);
-      }
       setThreeDModel(model);
       setThreeDModelExtension(fileExtension as SupportedThreeDModelExtension);
       setAvailableAnimationList(getAvailableAnimationListByModel(model));

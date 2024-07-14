@@ -25,8 +25,6 @@ const enErrors = {
   THREE_D_MODEL_LOADER_WAS_NOT_FOUND: `The loader for {0} was not found.`,
   INVALID_FILE: 'The selected file is invalid.',
   MODEL_FILE_EXTENSION_IS_NOT_SUPPORTED: 'Sorry, the selected 3D model file extension is not supported.',
-  MODEL_DOES_NOT_CONTAIN_ANIMATIONS:
-    "The selected 3D model doesn't contain animations. Please try selecting another 3D model.",
   SELECTED_FILE_IS_NOT_JSON: 'Invalid file: Please choose a file with a .json extension.',
   ERROR_LOADING_JSON:
     'Error loading JSON file: Please ensure the file has a valid .json extension and is formatted correctly.',
