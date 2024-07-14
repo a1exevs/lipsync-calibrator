@@ -7,6 +7,13 @@ const useClasses = makeStyles(() => ({
     display: 'flex',
     gap: MUISpacePx,
     width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  navBar__buttons: {
+    display: 'flex',
+    gap: MUISpacePx,
     alignItems: 'center',
     justifyContent: 'center',
   },

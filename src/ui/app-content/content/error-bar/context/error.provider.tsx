@@ -2,8 +2,8 @@ import React, { ReactNode, useState } from 'react';
 
 import { DEFAULT_SMALL_DELAY } from 'src/common/consts/consts';
 import { Nullable } from 'src/common/types/common';
-import { ErrorContext } from 'src/ui/app-content/content/error-context/error.context';
-import { Error, ErrorType, ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-context/error.types';
+import { ErrorContext } from 'src/ui/app-content/content/error-bar/context/error.context';
+import { Error, ErrorType, ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-bar/context/error.types';
 
 type Props = {
   children: ReactNode;

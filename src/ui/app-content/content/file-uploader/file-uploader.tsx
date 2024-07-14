@@ -8,8 +8,8 @@ import { calculatePercentage } from 'src/common/helpers/number';
 import { interpolateStrings } from 'src/common/helpers/string';
 import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
-import { AnimationItem } from 'src/ui/app-content/content/animation-list/animation-list.types';
-import { ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-context/error.types';
+import { AnimationItem } from 'src/store/slices/app/app.types';
+import { ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-bar/context/error.types';
 import {
   supportedThreeDModelFormats,
   threeDModelUploaderAccept,
@@ -21,7 +21,7 @@ import { isThreeDModelExtensionSupported } from 'src/ui/app-content/content/file
 import {
   SupportedThreeDModelExtension,
   ThreeDModel,
-} from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
+} from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
 import FileInput from 'src/ui/shared/components/file-input/file-input';
 import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 
@@ -71,9 +71,8 @@ const FileUploader: React.FC<Props> = ({
         setProgress(calculatePercentage(event.loaded, event.total)),
       );
       if (isEmpty(model.animations)) {
-        throw new Error(currentLang.errors.MODEL_DOES_NOT_CONTAIN_ANIMATIONS);
+        // throw new Error(currentLang.errors.MODEL_DOES_NOT_CONTAIN_ANIMATIONS);
       }
-
       setThreeDModel(model);
       setThreeDModelExtension(fileExtension as SupportedThreeDModelExtension);
       setAvailableAnimationList(getAvailableAnimationListByModel(model));

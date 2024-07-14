@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 
-import { UIBlockerContext } from 'src/ui/app-content/content/ui-blocker-context/ui-blocker.context';
+import { UIBlockerContext } from 'src/ui/app-content/content/ui-blocker/context/ui-blocker.context';
 
 type Props = {
   children: ReactNode;
