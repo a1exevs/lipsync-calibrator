@@ -58,6 +58,7 @@
     "typescript": "5.4.5"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@types/ajv": "1.0.0",
     "@types/d3": "7.4.3",
     "@types/react-redux": "7.1.33",
