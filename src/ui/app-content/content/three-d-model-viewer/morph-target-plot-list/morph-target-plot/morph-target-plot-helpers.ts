@@ -15,7 +15,7 @@ export const getXScaleFn = ({
 }): d3.ScaleLinear<number, number> => {
   return d3
     .scaleLinear()
-    .domain([0, d3.max(points, d => d.time)!])
+    .domain([0, d3.max(points, d => d.time) ?? 0])
     .range([marginLeft, width - marginRight]);
 };
 
@@ -32,7 +32,7 @@ export const getYScaleFn = ({
 }): d3.ScaleLinear<number, number> => {
   return d3
     .scaleLinear()
-    .domain([0, d3.max(points, d => d.value)!])
+    .domain([0, d3.max(points, d => d.value) ?? 0])
     .range([height - marginBottom, marginTop]);
 };
 

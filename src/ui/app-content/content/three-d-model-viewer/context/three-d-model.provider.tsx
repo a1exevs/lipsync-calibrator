@@ -1,8 +1,8 @@
 import React, { ReactNode, useState } from 'react';
 
 import { Nullable } from 'src/common/types/common';
-import { ThreeDModelContext } from 'src/ui/app-content/content/three-d-model-context/three-d-model.context';
-import { ThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
+import { ThreeDModelContext } from 'src/ui/app-content/content/three-d-model-viewer/context/three-d-model.context';
+import { ThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
 
 type Props = {
   children: ReactNode;

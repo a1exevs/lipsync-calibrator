@@ -1,3 +1,4 @@
+import { Nullable } from 'src/common/types/common';
 import { RootState } from 'src/store/store';
 import { TimeValue } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
 
@@ -11,3 +12,8 @@ export const morphTargetDataMap = (state: RootState) => state.app.morphTargetDat
 export const morphTargetDataFileName = (state: RootState) => state.app.morphTargetDataFileName;
 export const morphTargetPointsByName = (state: RootState, shapeName: string): TimeValue[] =>
   state.app.morphTargetDataMap?.[shapeName].data ?? [];
+export const selectedAnimationName = (state: RootState): Nullable<string> => {
+  const availableAnimations = state.app.availableAnimationList;
+  const selectedAnimation = state.app.selectedAnimationUUID;
+  return availableAnimations.find(animation => animation.uuid === selectedAnimation)?.name ?? null;
+};

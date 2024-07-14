@@ -8,7 +8,7 @@ import { currentLang } from 'src/common/land/lang.helper';
 import {
   SupportedThreeDModelExtension,
   ThreeDModelLoader,
-} from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
+} from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
 
 const ThreeDModelFileLoaderMap: Record<SupportedThreeDModelExtension, Loader> = {
   [SupportedThreeDModelExtension.FBX]: new FBXLoader(),

@@ -1,4 +1,4 @@
-import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
+import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
 
 export function getSupportedThreeDModelExtensions(): string[] {
   return Object.values(SupportedThreeDModelExtension);

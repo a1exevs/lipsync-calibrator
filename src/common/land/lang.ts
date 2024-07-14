@@ -23,12 +23,8 @@ const enMessages = {
 const enErrors = {
   THREE_D_MODEL_DRIVER_WAS_NOT_FOUND: `The driver for {0} was not found.`,
   THREE_D_MODEL_LOADER_WAS_NOT_FOUND: `The loader for {0} was not found.`,
-  NO_AVAILABLE_ANIMATIONS: 'The current 3D model has no available animations.',
-  NO_SELECTED_ANIMATION: 'The current 3D model does not contain the selected animation.',
   INVALID_FILE: 'The selected file is invalid.',
   MODEL_FILE_EXTENSION_IS_NOT_SUPPORTED: 'Sorry, the selected 3D model file extension is not supported.',
-  MODEL_DOES_NOT_CONTAIN_ANIMATIONS:
-    "The selected 3D model doesn't contain animations. Please try selecting another 3D model.",
   SELECTED_FILE_IS_NOT_JSON: 'Invalid file: Please choose a file with a .json extension.',
   ERROR_LOADING_JSON:
     'Error loading JSON file: Please ensure the file has a valid .json extension and is formatted correctly.',

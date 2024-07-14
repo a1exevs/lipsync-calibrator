@@ -1,5 +1,5 @@
-import { AnimationItem } from 'src/ui/app-content/content/animation-list/animation-list.types';
-import { ThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
+import { AnimationItem } from 'src/store/slices/app/app.types';
+import { ThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
 
 export function getAvailableAnimationListByModel(model: ThreeDModel): AnimationItem[] {
   const { animations } = model;

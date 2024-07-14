@@ -9,7 +9,8 @@ import { isNull, isUndefined } from 'src/common/helpers/guards';
 import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
 import { MorphTargetData } from 'src/store/slices/app/app.types';
-import { ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-context/error.types';
+import { ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-bar/context/error.types';
+import AnimationSelect from 'src/ui/app-content/content/three-d-model-viewer/animation-select/animation-select';
 import {
   jsonFileDownloadPostfix,
   jsonFileExtension,
@@ -119,22 +120,25 @@ const NavBar: React.FC<Props> = ({
 
   return (
     <MUIBox className={classes.navBar}>
-      <IconButton onClick={handleUploadJSONButtonClick} title={currentLang.labels.UPLOAD_JSON} color="inherit">
-        <UploadFileRoundedIcon />
-        <FileInput ref={jsonFileInputRef} accept={jsonFileUploaderAccept} handleFileUpload={handleJSONFileUpload} />
-      </IconButton>
-      <Tooltip title={getDownloadButtonTooltip(allowToExportToJSON)}>
-        <div>
-          <IconButton
-            title={getDownloadButtonTitle(allowToExportToJSON)}
-            disabled={!allowToExportToJSON}
-            color="inherit"
-            onClick={handleDownloadJSONButtonClick}
-          >
-            <DownloadForOfflineRoundedIcon />
-          </IconButton>
-        </div>
-      </Tooltip>
+      <MUIBox className={classes.navBar__buttons}>
+        <IconButton onClick={handleUploadJSONButtonClick} title={currentLang.labels.UPLOAD_JSON} color="inherit">
+          <UploadFileRoundedIcon />
+          <FileInput ref={jsonFileInputRef} accept={jsonFileUploaderAccept} handleFileUpload={handleJSONFileUpload} />
+        </IconButton>
+        <Tooltip title={getDownloadButtonTooltip(allowToExportToJSON)}>
+          <div>
+            <IconButton
+              title={getDownloadButtonTitle(allowToExportToJSON)}
+              disabled={!allowToExportToJSON}
+              color="inherit"
+              onClick={handleDownloadJSONButtonClick}
+            >
+              <DownloadForOfflineRoundedIcon />
+            </IconButton>
+          </div>
+        </Tooltip>
+      </MUIBox>
+      <AnimationSelect />
     </MUIBox>
   );
 };
