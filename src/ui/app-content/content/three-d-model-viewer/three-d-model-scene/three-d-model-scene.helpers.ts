@@ -41,6 +41,13 @@ export function modelHasMeshObjects(
   return !isEmpty(getMeshObjects(model as Group));
 }
 
+export function getSceneByModel(model: ThreeDModel, extension: Nullable<SupportedThreeDModelExtension>): Group {
+  if (extension === 'gltf') {
+    return (model as GLTF).scene;
+  }
+  return model as Group;
+}
+
 export function getKeyFrameTracks(
   morphTargets: Nullable<Record<string, Shape>>,
   meshObjects: Object3D[],
