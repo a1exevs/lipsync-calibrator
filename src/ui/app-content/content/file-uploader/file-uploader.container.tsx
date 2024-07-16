@@ -12,10 +12,11 @@ import { useAppDispatch } from 'src/ui/shared/hooks/store-hooks';
 const FileUploaderContainer: React.FC = () => {
   const dispatch = useAppDispatch();
   const { setError, resetError } = useError();
-  const { setThreeDModel } = useThreeDModel();
+  const { setThreeDModel, setThreeDModelExtension: setThreeDModelExtensionCtxt } = useThreeDModel();
   const { blockUI, unblockUI } = useUiBlocker();
 
   const setModelExtension = (extension: SupportedThreeDModelExtension) => {
+    setThreeDModelExtensionCtxt(extension);
     dispatch(setThreeDModelExtension({ extension }));
   };
   const setAnimationList = (animations: AnimationItem[]): void => {

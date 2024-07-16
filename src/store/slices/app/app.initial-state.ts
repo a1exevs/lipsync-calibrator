@@ -10,4 +10,5 @@ export const initialState: AppState = {
   morphTargetNames: [],
   morphTargetDataMap: null,
   morphTargetDataFileName: null,
+  wasMorphTargetDataChanged: false,
 };

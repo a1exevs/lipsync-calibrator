@@ -17,3 +17,4 @@ export const selectedAnimationName = (state: RootState): Nullable<string> => {
   const selectedAnimation = state.app.selectedAnimationUUID;
   return availableAnimations.find(animation => animation.uuid === selectedAnimation)?.name ?? null;
 };
+export const wasMorphTargetDataChanged = (state: RootState) => state.app.wasMorphTargetDataChanged;

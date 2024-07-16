@@ -1,9 +1,12 @@
 import { useFrame } from '@react-three/fiber';
+import { useConfirm } from 'material-ui-confirm';
 import React, { useEffect, useRef } from 'react';
 import { AnimationMixer, Object3D } from 'three';
 import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 
 import { isEmpty, isNull } from 'src/common/helpers/guards';
+import { interpolateStrings } from 'src/common/helpers/string';
+import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
 import { AnimationItem } from 'src/store/slices/app/app.types';
 import { getAnimationItem } from 'src/ui/app-content/content/file-uploader/helpers/animations-data-reader.helper';
@@ -24,14 +27,22 @@ const GLTFModelScene: React.FC<{
   const { scene } = model;
   const meshRefs = useRef<Object3D[]>([]);
   const mixerRef = useRef<Nullable<AnimationMixer>>(null);
+  const confirm = useConfirm();
 
   useEffect(() => {
     meshRefs.current = getMeshObjects(model.scene);
     if (!isNull(morphTargets) && !isEmpty(meshRefs.current)) {
       const morphTracks = getKeyFrameTracks(morphTargets, meshRefs.current);
       if (!isEmpty(morphTracks)) {
-        const { clip, clipIndex } = createOrUpdateCustomAnimationClip(model, morphTracks);
+        const { clip, clipIndex, clipName } = createOrUpdateCustomAnimationClip(model, morphTracks);
         updateAnimationList(getAnimationItem(clip), clipIndex);
+        if (clipIndex === -1) {
+          confirm({
+            title: currentLang.labels.NOTIFICATION,
+            description: interpolateStrings(currentLang.messages.NEW_ANIMATION_ADDING_FOR_PLOTS, clipName),
+            hideCancelButton: true,
+          });
+        }
       }
     }
     mixerRef.current = new AnimationMixer(model.scene);

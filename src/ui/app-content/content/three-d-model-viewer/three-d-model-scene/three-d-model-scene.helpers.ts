@@ -1,10 +1,14 @@
 import { AnimationClip, AnimationMixer, Group, Mesh, NumberKeyframeTrack, Object3D } from 'three';
+import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 
-import { isUndefined } from 'src/common/helpers/guards';
+import { isEmpty, isUndefined } from 'src/common/helpers/guards';
 import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
 import { Shape } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
-import { ThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
+import {
+  SupportedThreeDModelExtension,
+  ThreeDModel,
+} from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
 
 export function runAnimation(model: ThreeDModel, animationUUID: Nullable<string>, scene: Group): AnimationMixer {
   const mixer = new AnimationMixer(scene);
@@ -16,15 +20,25 @@ export function runAnimation(model: ThreeDModel, animationUUID: Nullable<string>
   return mixer;
 }
 
-export function getMeshObjects(scene: Group): Mesh[] {
+export function getMeshObjects(scene: Nullable<Group>): Mesh[] {
   const meshObjects: Mesh[] = [];
-  scene.traverse(object => {
+  scene?.traverse(object => {
     const mesh = object as Mesh;
     if (mesh.isMesh && mesh.morphTargetInfluences) {
       meshObjects.push(mesh);
     }
   });
   return meshObjects;
+}
+
+export function modelHasMeshObjects(
+  model: Nullable<ThreeDModel>,
+  extension: Nullable<SupportedThreeDModelExtension>,
+): boolean {
+  if (extension === 'gltf') {
+    return !isEmpty(getMeshObjects((model as GLTF).scene));
+  }
+  return !isEmpty(getMeshObjects(model as Group));
 }
 
 export function getKeyFrameTracks(
@@ -57,7 +71,7 @@ export function getKeyFrameTracks(
 export function createOrUpdateCustomAnimationClip(
   model: ThreeDModel,
   morphTracks: NumberKeyframeTrack[],
-): { clip: AnimationClip; clipIndex: number } {
+): { clip: AnimationClip; clipIndex: number; clipName: string } {
   const clipName = `Shape animation (${currentLang.labels.APP_NAME})`;
   const clip = new AnimationClip(clipName, -1, morphTracks);
   const clipIndex = model.animations.findIndex(animation => animation.name === clipName);
@@ -66,5 +80,5 @@ export function createOrUpdateCustomAnimationClip(
   } else {
     model.animations[clipIndex] = clip;
   }
-  return { clip, clipIndex };
+  return { clip, clipIndex, clipName };
 }

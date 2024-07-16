@@ -2,7 +2,11 @@ import React, { ReactNode, useState } from 'react';
 
 import { Nullable } from 'src/common/types/common';
 import { ThreeDModelContext } from 'src/ui/app-content/content/three-d-model-viewer/context/three-d-model.context';
-import { ThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
+import { modelHasMeshObjects } from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-scene/three-d-model-scene.helpers';
+import {
+  SupportedThreeDModelExtension,
+  ThreeDModel,
+} from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
 
 type Props = {
   children: ReactNode;
@@ -10,7 +14,15 @@ type Props = {
 
 const ThreeDModelProvider: React.FC<Props> = ({ children }) => {
   const [threeDModel, setThreeDModel] = useState<Nullable<ThreeDModel>>(null);
-  return <ThreeDModelContext.Provider value={{ threeDModel, setThreeDModel }}>{children}</ThreeDModelContext.Provider>;
+  const [threeDModelExtension, setThreeDModelExtension] = useState<Nullable<SupportedThreeDModelExtension>>(null);
+  const hasMeshObject = modelHasMeshObjects(threeDModel, threeDModelExtension);
+  return (
+    <ThreeDModelContext.Provider
+      value={{ hasMeshObject, threeDModel, setThreeDModel, threeDModelExtension, setThreeDModelExtension }}
+    >
+      {children}
+    </ThreeDModelContext.Provider>
+  );
 };
 
 export default ThreeDModelProvider;

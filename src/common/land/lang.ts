@@ -11,13 +11,23 @@ const enLabels = {
   BACK_BTN: 'BACK',
   DURATION: 'Duration: {0} s',
   AVAILABLE_ANIMATIONS: 'Available animations',
+  CONFIRMATION: 'Confirmation',
+  NOTIFICATION: 'Notification',
 };
+
 const enMessages = {
   THREE_D_MODEL_LOADED: `3D model (loaded - {0}%)`,
   SUPPORTED_FORMATS: `Supported formats: {0}.`,
   THIS_APP_FOR_CALIBRATE: `This application is for calibrating 3D model visemes.`,
   SELECT_THREE_D_FILE: `First, let's select the 3D model file you need.`,
   DOWNLOAD_JSON_NOT_AVAILABLE: '“Download JSON File” will be available after you import the JSON file.',
+  NEW_ANIMATION_ADDING_FOR_PLOTS: "A new animation item named '{0}' has been added for working with plots.",
+  UNSAVED_PLOT_CHANGES_IMPORT_CONFIRMATION:
+    'You have some unsaved changes in the previous plots. Your changes will be discarded after clicking OK. Do you want to proceed with the new import?',
+  MODEL_WITHOUT_MESH_OBJECTS:
+    "Current model doesn't contain mesh-objects. Therefore, changes on the plot won't be synced with the model. Do you want to continue with the JSON-data import?",
+  UNSAVED_PLOT_CHANGES_BACK_BUTTON_CONFIRMATION:
+    'You have some unsaved changes in the current plots. Your changes will be discarded after clicking Back. Do you want to proceed to the previous page?',
 };
 
 const enErrors = {

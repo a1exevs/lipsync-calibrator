@@ -2,6 +2,7 @@ import DownloadForOfflineRoundedIcon from '@mui/icons-material/DownloadForOfflin
 import UploadFileRoundedIcon from '@mui/icons-material/UploadFileRounded';
 import { Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
+import { useConfirm } from 'material-ui-confirm';
 import React, { useRef } from 'react';
 
 import { getFileData } from 'src/common/helpers/file';
@@ -31,6 +32,10 @@ type Props = {
   morphTargetDataMap: Nullable<Record<string, Shape>>;
   morphTargetDataFileName: Nullable<string>;
   setMorphTargetData: (shapeData: MorphTargetData) => void;
+  resetMorphTargetDataFromJSON: () => void;
+  modelHasMeshObject: boolean;
+  wasMorphTargetDataChanged: boolean;
+  setWasMorphTargetDataChanged: (hasChanges: boolean) => void;
 };
 
 const NavBar: React.FC<Props> = ({
@@ -40,11 +45,15 @@ const NavBar: React.FC<Props> = ({
   blockUI,
   unblockUI,
   setMorphTargetData,
+  resetMorphTargetDataFromJSON,
   morphTargetDataMap,
   morphTargetDataFileName,
+  modelHasMeshObject,
+  wasMorphTargetDataChanged,
+  setWasMorphTargetDataChanged,
 }) => {
-  // TODO Export to JSON button click handler
   const classes = useClasses();
+  const confirm = useConfirm();
 
   const jsonFileInputRef = useRef<Nullable<HTMLInputElement>>(null);
 
@@ -59,10 +68,28 @@ const NavBar: React.FC<Props> = ({
     event.target.value = '';
     unblockUI();
   };
-  const handleJSONFileUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
+
+  const handleJSONFileUpload = async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
     // TODO Maybe replace to separate helper
     try {
+      if (!modelHasMeshObject) {
+        await confirm({
+          title: currentLang.labels.CONFIRMATION,
+          description: currentLang.messages.MODEL_WITHOUT_MESH_OBJECTS,
+          cancellationButtonProps: { color: 'secondary' },
+        });
+      }
+
+      if (wasMorphTargetDataChanged) {
+        await confirm({
+          title: currentLang.labels.CONFIRMATION,
+          description: currentLang.messages.UNSAVED_PLOT_CHANGES_IMPORT_CONFIRMATION,
+          cancellationButtonProps: { color: 'secondary' },
+        });
+      }
+
       blockUI();
+      resetMorphTargetDataFromJSON();
       const file = event.target.files?.[0];
       if (isUndefined(file) || !file.size) {
         throw new Error(currentLang.errors.INVALID_FILE);
@@ -116,6 +143,7 @@ const NavBar: React.FC<Props> = ({
     a.download = `${morphTargetDataFileName}${jsonFileDownloadPostfix}.json`;
     a.click();
     URL.revokeObjectURL(url);
+    setWasMorphTargetDataChanged(false);
   };
 
   return (
