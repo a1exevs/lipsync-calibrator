@@ -4,7 +4,7 @@ import { morphTargetDataMap, selectedAnimationUUID, threeDModelExtension } from 
 import { updateAnimations } from 'src/store/slices/app/app.thunks';
 import { AnimationItem } from 'src/store/slices/app/app.types';
 import { useThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/context/use-three-d-model';
-import ThreeDModelScene from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-scene/three-d-model-scene';
+import ThreeDModelSceneWrapper from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-scene/three-d-model-scene-wrapper';
 import { useAppDispatch, useAppSelector } from 'src/ui/shared/hooks/store-hooks';
 
 const ThreeDModelSceneContainer: React.FC = () => {
@@ -19,7 +19,7 @@ const ThreeDModelSceneContainer: React.FC = () => {
   };
 
   return (
-    <ThreeDModelScene
+    <ThreeDModelSceneWrapper
       threeDModel={threeDModel}
       modelExtension={modelExtension}
       animationUUID={animationUUID}

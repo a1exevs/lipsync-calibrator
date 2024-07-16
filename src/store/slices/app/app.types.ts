@@ -20,4 +20,5 @@ export type AppState = {
   morphTargetNames: string[];
   morphTargetDataMap: Nullable<Record<string, Shape>>;
   morphTargetDataFileName: Nullable<string>;
+  wasMorphTargetDataChanged: boolean;
 };

@@ -58,12 +58,16 @@ const appSlice = createSlice({
 
       state.allowToExportToJSON = !isEmpty(payload.data);
     },
+    setWasMorphTargetDataChanged(state, { payload }: PayloadAction<{ hasChanges: boolean }>): void {
+      state.wasMorphTargetDataChanged = payload.hasChanges;
+    },
     resetMorphTargetData(state): void {
       state.morphTargetNames = [];
       state.morphTargetDataMap = null;
       state.morphTargetDataFileName = null;
 
       state.allowToExportToJSON = false;
+      state.wasMorphTargetDataChanged = false;
     },
     updateMorphTargetData(state, { payload }: PayloadAction<{ shapeName: string; newPoints: TimeValue[] }>): void {
       const { shapeName, newPoints } = payload;
@@ -72,6 +76,7 @@ const appSlice = createSlice({
         return;
       }
       shapeToUpdate.data = newPoints;
+      state.wasMorphTargetDataChanged = true;
     },
   },
 });
@@ -88,6 +93,7 @@ export const {
   setMorphTargetData,
   resetMorphTargetData,
   updateMorphTargetData,
+  setWasMorphTargetDataChanged,
 } = appSlice.actions;
 
 export const APP_SLICE_NAME = appSlice.name;
