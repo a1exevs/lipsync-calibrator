@@ -10,6 +10,11 @@
   font-family: 'Roboto', sans-serif;
 }
 
+* {
+  scrollbar-color: #505354 #707374;
+  scrollbar-width: thin;
+}
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;

@@ -17,14 +17,16 @@ import {
   IdentifiedTimeValue,
   TimeValue,
 } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
+import { MUISpacePx } from 'src/ui/shared/styles/consts';
 
 type Porps = {
   plotName: string;
   points: TimeValue[];
   updatePoints: (points: TimeValue[]) => void;
+  plotWidth: Nullable<number>;
 };
 
-const MorphTargetPlot: React.FC<Porps> = ({ plotName, points, updatePoints }) => {
+const MorphTargetPlot: React.FC<Porps> = ({ plotName, points, updatePoints, plotWidth }) => {
   const theme = useTheme();
 
   const textColor = theme.palette.text.primary;
@@ -34,24 +36,14 @@ const MorphTargetPlot: React.FC<Porps> = ({ plotName, points, updatePoints }) =>
   const indexesPoints: IdentifiedTimeValue[] = points.map((p, index) => ({ ...p, id: index }));
 
   // TODO Move to consts
-  const [width, setWidth] = useState(window.innerWidth * 0.9);
   const height = 200;
+  const width = plotWidth ? plotWidth - MUISpacePx * 8 : 300;
   const margin = { top: 20, right: 30, bottom: 50, left: 60 };
   const draggablePointSize = 5;
   const draggablePointColor = 'red';
   const xAxisLabel = 'Time, s';
   const yAxisLabel = 'Morph Target value';
   const lineColor = 'steelblue';
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth * 0.9);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     if (!svgRef.current) {
