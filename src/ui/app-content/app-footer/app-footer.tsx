@@ -1,4 +1,4 @@
-import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import RestartAltOutlinedIcon from '@mui/icons-material/RestartAltOutlined';
 import { Button } from '@mui/material';
 import { useConfirm } from 'material-ui-confirm';
 import React from 'react';
@@ -38,12 +38,12 @@ const AppFooter: React.FC<Props> = ({ showBackButton, onBackButtonClick, wasMorp
         {showBackButton && (
           <Button
             onClick={handleBackButtonClick}
-            color="inherit"
-            variant="text"
+            color="secondary"
+            variant="outlined"
             size="large"
-            startIcon={<KeyboardReturnIcon />}
+            startIcon={<RestartAltOutlinedIcon />}
           >
-            {currentLang.labels.BACK_BTN}
+            {currentLang.labels.RESET}
           </Button>
         )}
       </footer>

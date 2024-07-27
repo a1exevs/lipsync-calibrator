@@ -8,7 +8,7 @@ const enLabels = {
   UPLOAD_MODEL: 'Select model',
   UPLOAD_JSON: 'Upload JSON file',
   DOWNLOAD_JSON: 'Download JSON file',
-  BACK_BTN: 'BACK',
+  RESET: 'Reset',
   DURATION: 'Duration: {0} s',
   AVAILABLE_ANIMATIONS: 'Available animations',
   CONFIRMATION: 'Confirmation',

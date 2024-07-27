@@ -8,7 +8,7 @@ import { interpolateStrings } from 'src/common/helpers/string';
 import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
 import { AnimationItem } from 'src/store/slices/app/app.types';
-import { getAnimationItem } from 'src/ui/app-content/content/file-uploader/helpers/animations-data-reader.helper';
+import { getAnimationItem } from 'src/ui/app-content/content/three-d-model-viewer/file-uploader/helpers/animations-data-reader.helper';
 import { Shape } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
 import {
   createOrUpdateCustomAnimationClip,

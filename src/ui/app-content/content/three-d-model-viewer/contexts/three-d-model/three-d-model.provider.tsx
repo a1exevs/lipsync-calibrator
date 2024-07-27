@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 
 import { Nullable } from 'src/common/types/common';
-import { ThreeDModelContext } from 'src/ui/app-content/content/three-d-model-viewer/context/three-d-model.context';
+import { ThreeDModelContext } from 'src/ui/app-content/content/three-d-model-viewer/contexts/three-d-model/three-d-model.context';
 import { modelHasMeshObjects } from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-scene/three-d-model-scene.helpers';
 import {
   SupportedThreeDModelExtension,

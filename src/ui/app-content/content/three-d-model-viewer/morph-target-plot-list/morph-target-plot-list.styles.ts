@@ -7,7 +7,10 @@ const useClasses = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     gap: 2 * MUISpacePx,
-    marginTop: 4 * MUISpacePx,
+    margin: 2 * MUISpacePx,
+    maxHeight: 40 * MUISpacePx,
+    maxWidth: '100%',
+    overflow: 'auto',
   },
 }));
 

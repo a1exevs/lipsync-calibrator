@@ -13,11 +13,11 @@ import { ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-bar/c
 import {
   supportedThreeDModelFormats,
   threeDModelUploaderAccept,
-} from 'src/ui/app-content/content/file-uploader/file-uploader.consts';
-import useClasses from 'src/ui/app-content/content/file-uploader/file-uploader.styles';
-import { getAvailableAnimationListByModel } from 'src/ui/app-content/content/file-uploader/helpers/animations-data-reader.helper';
-import { ThreeDModelFileLoaderFactory } from 'src/ui/app-content/content/file-uploader/helpers/file-loaders.factory';
-import { isThreeDModelExtensionSupported } from 'src/ui/app-content/content/file-uploader/helpers/supported-three-d-model-extensions.helper';
+} from 'src/ui/app-content/content/three-d-model-viewer/file-uploader/file-uploader.consts';
+import useClasses from 'src/ui/app-content/content/three-d-model-viewer/file-uploader/file-uploader.styles';
+import { getAvailableAnimationListByModel } from 'src/ui/app-content/content/three-d-model-viewer/file-uploader/helpers/animations-data-reader.helper';
+import { ThreeDModelFileLoaderFactory } from 'src/ui/app-content/content/three-d-model-viewer/file-uploader/helpers/file-loaders.factory';
+import { isThreeDModelExtensionSupported } from 'src/ui/app-content/content/three-d-model-viewer/file-uploader/helpers/supported-three-d-model-extensions.helper';
 import {
   SupportedThreeDModelExtension,
   ThreeDModel,

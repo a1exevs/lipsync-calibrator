@@ -6,7 +6,7 @@ import { appStep, wasMorphTargetDataChanged } from 'src/store/slices/app/app.sel
 import { previousStep } from 'src/store/slices/app/app.slice';
 import { resetThreeDModelViewerStepState } from 'src/store/slices/app/app.thunks';
 import AppFooter from 'src/ui/app-content/app-footer/app-footer';
-import { useThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/context/use-three-d-model';
+import { useThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/contexts/three-d-model/use-three-d-model';
 import { useAppDispatch, useAppSelector } from 'src/ui/shared/hooks/store-hooks';
 
 const AppFooterContainer: React.FC = () => {
