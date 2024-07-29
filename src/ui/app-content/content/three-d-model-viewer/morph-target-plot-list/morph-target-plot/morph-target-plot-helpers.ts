@@ -32,7 +32,7 @@ export const getYScaleFn = ({
 }): d3.ScaleLinear<number, number> => {
   return d3
     .scaleLinear()
-    .domain([0, d3.max(points, d => d.value) ?? 0])
+    .domain([0, (d3.max(points, d => d.value) ?? 0) > 0 ? d3.max(points, d => d.value) ?? 0 : 1])
     .range([height - marginBottom, marginTop]);
 };
 

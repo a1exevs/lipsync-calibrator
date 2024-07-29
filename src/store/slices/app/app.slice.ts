@@ -27,10 +27,6 @@ const appSlice = createSlice({
       }
       state.appStep = APP_STEPS[index - 1];
     },
-    goToFirstStep(state): void {
-      const firstStep = APP_STEPS[0];
-      state.appStep = firstStep;
-    },
     setThreeDModelExtension(state, { payload }: PayloadAction<{ extension: SupportedThreeDModelExtension }>): void {
       state.threeDModelExtension = payload.extension;
     },
@@ -83,7 +79,6 @@ const appSlice = createSlice({
 export const {
   nextStep,
   previousStep,
-  goToFirstStep,
   setThreeDModelExtension,
   resetThreeDModelExtension,
   setAvailableAnimationList,

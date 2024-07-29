@@ -8,9 +8,16 @@ const useClasses = makeStyles(() => ({
     flexDirection: 'column',
     gap: 2 * MUISpacePx,
     margin: 2 * MUISpacePx,
-    maxHeight: 40 * MUISpacePx,
-    maxWidth: '100%',
+    height: 40 * MUISpacePx,
+    width: '100%',
     overflow: 'auto',
+  },
+  morphTargetPlotList_withoutOverflow: {
+    overflow: 'unset',
+  },
+  morphTargetPlotList_withCenterAlignment: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 }));
 
