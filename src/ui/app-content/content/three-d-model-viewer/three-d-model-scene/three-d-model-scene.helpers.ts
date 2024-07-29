@@ -22,7 +22,7 @@ export function runAnimation(model: ThreeDModel, animationUUID: Nullable<string>
 
 export function getMeshObjects(scene: Nullable<Group>): Mesh[] {
   const meshObjects: Mesh[] = [];
-  scene?.traverse(object => {
+  scene?.traverse?.(object => {
     const mesh = object as Mesh;
     if (mesh.isMesh && mesh.morphTargetInfluences) {
       meshObjects.push(mesh);
