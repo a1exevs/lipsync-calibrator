@@ -3,16 +3,20 @@ import { jsonStructureExample } from 'src/ui/app-content/content/three-d-model-v
 
 export type LanguageCode = (typeof languageCodes)[number];
 
+const UPLOAD_JSON_EN = 'Upload JSON file';
+
 const enLabels = {
   APP_NAME: 'Lipsync calibrator',
   UPLOAD_MODEL: 'Select model',
-  UPLOAD_JSON: 'Upload JSON file',
+  UPLOAD_JSON: UPLOAD_JSON_EN,
   DOWNLOAD_JSON: 'Download JSON file',
   RESET: 'Reset',
   DURATION: 'Duration: {0} s',
   AVAILABLE_ANIMATIONS: 'Available animations',
   CONFIRMATION: 'Confirmation',
   NOTIFICATION: 'Notification',
+  EXPAND_PLOT_PANEL: 'Expand Plot panel',
+  COLLAPSE_PLOT_PANEL: 'Collapse Plot panel',
 };
 
 const enMessages = {
@@ -28,6 +32,8 @@ const enMessages = {
     "Current model doesn't contain mesh-objects. Therefore, changes on the plot won't be synced with the model. Do you want to continue with the JSON-data import?",
   UNSAVED_PLOT_CHANGES_BACK_BUTTON_CONFIRMATION:
     'You have some unsaved changes in the current plots. Your changes will be discarded after clicking Back. Do you want to proceed to the previous page?',
+  PLOT_PANEL_NO_DATA: `Use the '${UPLOAD_JSON_EN}' button to upload the data. Plots  for working with shapes will be displayed here.`,
+  PLOT_PANEL_NOT_AVAILABLE: 'The plot panel will be available after you select the 3D model file you need.',
 };
 
 const enErrors = {

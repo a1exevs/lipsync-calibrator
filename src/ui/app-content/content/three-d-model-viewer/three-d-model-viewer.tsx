@@ -1,9 +1,12 @@
 import ShowChartOutlinedIcon from '@mui/icons-material/ShowChartOutlined';
+import { Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
+import { IconButtonOwnProps } from '@mui/material/IconButton/IconButton';
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import React, { Suspense, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 
+import { currentLang } from 'src/common/land/lang.helper';
 import { AppStep } from 'src/common/types/app';
 import { Nullable } from 'src/common/types/common';
 import FileUploaderContainer from 'src/ui/app-content/content/three-d-model-viewer/file-uploader/file-uploader.container';
@@ -35,19 +38,46 @@ const ThreeDModelViewer: React.FC<Props> = ({ step, setContentPanelOffsetWidth }
 
   const contentPanelRef = useRef<Nullable<HTMLDivElement>>(null);
 
-  const [isPlotPanelOpened, setPLotPanelShow] = useState<boolean>(false);
+  const [isPlotPanelOpened, setPLotPanelOpen] = useState<boolean>(false);
+
+  const isViewerActive = step === AppStep.THREE_D_MODEL_VIEWER_STEP;
+
+  useEffect(() => {
+    if (step === AppStep.FILE_UPLOADER_STEP && isPlotPanelOpened) {
+      setPLotPanelOpen(false);
+    }
+  }, [step]);
 
   const handlePlotPanelOpen = () => {
     setContentPanelOffsetWidth(contentPanelRef.current?.offsetWidth ?? null);
-    setPLotPanelShow(show => !show);
+    setPLotPanelOpen(show => !show);
+  };
+  const getPlotPanelButtonTitle = (): string => {
+    return isPlotPanelOpened ? currentLang.labels.COLLAPSE_PLOT_PANEL : currentLang.labels.EXPAND_PLOT_PANEL;
+  };
+  const getPlotPanelButtonColor = (): IconButtonOwnProps['color'] => {
+    return isPlotPanelOpened ? 'primary' : 'default';
+  };
+  const getPlotPanelButtonTooltip = (): string => {
+    return isViewerActive ? '' : currentLang.messages.PLOT_PANEL_NOT_AVAILABLE;
   };
 
   return (
     <MUIBox className={classes.threeDModelViewer}>
       <MUIPaper className={classes.threeDModelViewer__leftPanel} elevation={elevationNormal}>
-        <IconButton title={'Expand Plot panel'} onClick={handlePlotPanelOpen} aria-label="plot-panel-button">
-          <ShowChartOutlinedIcon />
-        </IconButton>
+        <Tooltip placement="right-end" title={getPlotPanelButtonTooltip()}>
+          <div>
+            <IconButton
+              color={getPlotPanelButtonColor()}
+              title={getPlotPanelButtonTitle()}
+              onClick={handlePlotPanelOpen}
+              aria-label="plot-panel-button"
+              disabled={!isViewerActive}
+            >
+              <ShowChartOutlinedIcon />
+            </IconButton>
+          </div>
+        </Tooltip>
       </MUIPaper>
       <div ref={contentPanelRef}>
         <MUIPaper className={classes.threeDModelViewer__contentPanel} elevation={elevationNormal}>
@@ -65,11 +95,7 @@ const ThreeDModelViewer: React.FC<Props> = ({ step, setContentPanelOffsetWidth }
       </div>
       <MUIPaper className={classes.threeDModelViewer__rightPanel} elevation={elevationNormal}>
         {step === AppStep.FILE_UPLOADER_STEP && <FileUploaderContainer />}
-        {step === AppStep.THREE_D_MODEL_VIEWER_STEP && (
-          <>
-            <NavBarContainer />
-          </>
-        )}
+        {isViewerActive && <NavBarContainer />}
       </MUIPaper>
     </MUIBox>
   );
