@@ -13,7 +13,7 @@ import {
 type Props = {
   threeDModel: Nullable<ThreeDModel>;
   modelExtension: Nullable<SupportedThreeDModelExtension>;
-  animationUUID: Nullable<string>;
+  animationUUIDs: string[];
   morphTargets: Nullable<Record<string, Shape>>;
   updateAnimationList: (animationToUpdate: AnimationItem, index: number) => void;
 };
@@ -22,14 +22,14 @@ const ThreeDModelSceneWrapper: React.FC<Props> = ({
   threeDModel,
   modelExtension,
   morphTargets,
-  animationUUID,
+  animationUUIDs,
   updateAnimationList,
 }) => {
   return (
     <>
       {threeDModel && (
         <ThreeDModelScene
-          animationUUID={animationUUID}
+          animationUUIDs={animationUUIDs}
           model={threeDModel}
           scene={getSceneByModel(threeDModel, modelExtension)}
           morphTargets={morphTargets}

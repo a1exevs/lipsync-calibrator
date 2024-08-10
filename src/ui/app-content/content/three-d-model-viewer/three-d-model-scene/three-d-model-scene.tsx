@@ -19,12 +19,12 @@ import {
 import { ThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
 
 const ThreeDModelScene: React.FC<{
-  animationUUID: Nullable<string>;
+  animationUUIDs: string[];
   scene: Group;
   model: ThreeDModel;
   morphTargets: Nullable<Record<string, Shape>>;
   updateAnimationList: (animationToUpdate: AnimationItem, index: number) => void;
-}> = ({ animationUUID, model, morphTargets, updateAnimationList, scene }) => {
+}> = ({ animationUUIDs, model, morphTargets, updateAnimationList, scene }) => {
   const meshRefs = useRef<Object3D[]>([]);
   const mixerRef = useRef<Nullable<AnimationMixer>>(null);
   const confirm = useConfirm();
@@ -49,8 +49,12 @@ const ThreeDModelScene: React.FC<{
   }, [model, morphTargets]);
 
   useEffect(() => {
-    mixerRef.current = runAnimation(model, animationUUID, scene);
-  }, [model, animationUUID]);
+    if (!isNull(mixerRef.current) && isEmpty(animationUUIDs)) {
+      mixerRef.current.stopAllAction();
+    }
+
+    mixerRef.current = runAnimation(model, animationUUIDs, scene);
+  }, [model, animationUUIDs]);
 
   useFrame((_, delta) => {
     mixerRef.current?.update(delta);

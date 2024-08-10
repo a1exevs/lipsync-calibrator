@@ -10,13 +10,16 @@ import {
   ThreeDModel,
 } from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
 
-export function runAnimation(model: ThreeDModel, animationUUID: Nullable<string>, scene: Group): AnimationMixer {
+export function runAnimation(model: ThreeDModel, animationUUIDs: string[], scene: Group): AnimationMixer {
   const mixer = new AnimationMixer(scene);
-  const selectedAnimation = model.animations.find(clip => animationUUID === clip.uuid);
-  if (!isUndefined(selectedAnimation)) {
-    const action = mixer.clipAction(selectedAnimation);
-    action.play();
-  }
+  animationUUIDs.forEach(animationUUID => {
+    const selectedAnimation = model.animations.find(clip => animationUUID === clip.uuid);
+    if (!isUndefined(selectedAnimation)) {
+      const action = mixer.clipAction(selectedAnimation);
+      action.startAt(0);
+      action.play();
+    }
+  });
   return mixer;
 }
 

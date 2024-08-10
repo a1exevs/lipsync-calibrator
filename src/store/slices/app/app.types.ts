@@ -15,7 +15,7 @@ export type AppState = {
   appStep: AppStep;
   threeDModelExtension: Nullable<SupportedThreeDModelExtension>;
   availableAnimationList: AnimationItem[];
-  selectedAnimationUUID: Nullable<string>;
+  selectedAnimationUUIDs: string[];
   allowToExportToJSON: boolean;
   morphTargetNames: string[];
   morphTargetDataMap: Nullable<Record<string, Shape>>;
