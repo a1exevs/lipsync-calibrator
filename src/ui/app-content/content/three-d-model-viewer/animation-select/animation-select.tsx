@@ -8,12 +8,15 @@ import { currentLang } from 'src/common/land/lang.helper';
 import { availableAnimationList, selectedAnimationUUIDs } from 'src/store/slices/app/app.selectors';
 import { setSelectedAnimationUUIDs } from 'src/store/slices/app/app.slice';
 import { AnimationItem } from 'src/store/slices/app/app.types';
+import useClasses from 'src/ui/app-content/content/three-d-model-viewer/animation-select/animation-select.styles';
 import MUIAntSwitch from 'src/ui/shared/components/mui-ant-switch/mui-ant-switch';
 import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
 import { useAppDispatch, useAppSelector } from 'src/ui/shared/hooks/store-hooks';
 import { textOverflowEllipsis } from 'src/ui/shared/styles/consts';
 
 const AnimationSelect: React.FC = () => {
+  const classes = useClasses();
+
   const animations = useAppSelector(availableAnimationList);
   const selectedAnimations = useAppSelector(selectedAnimationUUIDs);
 
@@ -40,34 +43,33 @@ const AnimationSelect: React.FC = () => {
   };
 
   return (
-    <MUIBox>
+    <MUIBox className={classes.animationSelect}>
       {!isEmpty(animations) && (
-        <>
-          <List
-            sx={{ bgcolor: 'background.paper', maxWidth: '300px', overflowY: 'auto', maxHeight: '240px' }}
-            subheader={<ListSubheader>{currentLang.labels.ANIMATIONS}</ListSubheader>}
-          >
-            {animations.map(animation => {
-              return (
-                <ListItem key={getAnimationItemId(animation)}>
-                  <ListItemText
-                    primaryTypographyProps={textOverflowEllipsis()}
-                    id={getAnimationItemId(animation)}
-                    primary={`sfsfsfsfsfsdfsdfsdfsfsdfsfsdfsf${animation.name}sfsfsfsfsfsdfsdfsdfsfsdfsfsdfsf`}
-                  />
-                  <MUIAntSwitch
-                    edge="end"
-                    onChange={handleToggle(animation.uuid)}
-                    checked={selectedAnimations.indexOf(animation.uuid) !== -1}
-                    inputProps={{
-                      'aria-labelledby': `animation-list-${animation.uuid}`,
-                    }}
-                  />
-                </ListItem>
-              );
-            })}
-          </List>
-        </>
+        <List
+          className={classes.animationSelect__list}
+          subheader={<ListSubheader>{currentLang.labels.ANIMATIONS}</ListSubheader>}
+        >
+          {animations.map(animation => {
+            return (
+              <ListItem key={getAnimationItemId(animation)}>
+                <ListItemText
+                  title={animation.name}
+                  primaryTypographyProps={textOverflowEllipsis()}
+                  id={getAnimationItemId(animation)}
+                  primary={animation.name}
+                />
+                <MUIAntSwitch
+                  edge="end"
+                  onChange={handleToggle(animation.uuid)}
+                  checked={selectedAnimations.indexOf(animation.uuid) !== -1}
+                  inputProps={{
+                    'aria-labelledby': `animation-list-${animation.uuid}`,
+                  }}
+                />
+              </ListItem>
+            );
+          })}
+        </List>
       )}
     </MUIBox>
   );
