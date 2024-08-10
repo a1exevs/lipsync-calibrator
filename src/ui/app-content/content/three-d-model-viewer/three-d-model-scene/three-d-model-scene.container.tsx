@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { morphTargetDataMap, selectedAnimationUUID, threeDModelExtension } from 'src/store/slices/app/app.selectors';
+import { morphTargetDataMap, selectedAnimationUUIDs, threeDModelExtension } from 'src/store/slices/app/app.selectors';
 import { updateAnimations } from 'src/store/slices/app/app.thunks';
 import { AnimationItem } from 'src/store/slices/app/app.types';
 import { useThreeDModel } from 'src/ui/app-content/content/three-d-model-viewer/contexts/three-d-model/use-three-d-model';
@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from 'src/ui/shared/hooks/store-hooks'
 const ThreeDModelSceneContainer: React.FC = () => {
   const { threeDModel } = useThreeDModel();
   const modelExtension = useAppSelector(threeDModelExtension);
-  const animationUUID = useAppSelector(selectedAnimationUUID);
+  const animationUUIDs = useAppSelector(selectedAnimationUUIDs);
   const morphTargets = useAppSelector(morphTargetDataMap);
 
   const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ const ThreeDModelSceneContainer: React.FC = () => {
     <ThreeDModelSceneWrapper
       threeDModel={threeDModel}
       modelExtension={modelExtension}
-      animationUUID={animationUUID}
+      animationUUIDs={animationUUIDs}
       morphTargets={morphTargets}
       updateAnimationList={updateAnimationList}
     />

@@ -39,11 +39,11 @@ const appSlice = createSlice({
     resetAvailableAnimationList(state): void {
       state.availableAnimationList = [];
     },
-    setSelectedAnimationUUID(state, { payload }: PayloadAction<{ animationUUID: string }>): void {
-      state.selectedAnimationUUID = payload.animationUUID;
+    setSelectedAnimationUUIDs(state, { payload }: PayloadAction<{ animationUUIDs: string[] }>): void {
+      state.selectedAnimationUUIDs = payload.animationUUIDs;
     },
-    resetSelectedAnimationUUID(state): void {
-      state.selectedAnimationUUID = null;
+    resetSelectedAnimationUUIDs(state): void {
+      state.selectedAnimationUUIDs = [];
     },
     setMorphTargetData(state, { payload }: PayloadAction<{ data: MorphTargetData }>): void {
       const { data, fileName } = payload.data;
@@ -83,8 +83,8 @@ export const {
   resetThreeDModelExtension,
   setAvailableAnimationList,
   resetAvailableAnimationList,
-  setSelectedAnimationUUID,
-  resetSelectedAnimationUUID,
+  setSelectedAnimationUUIDs,
+  resetSelectedAnimationUUIDs,
   setMorphTargetData,
   resetMorphTargetData,
   updateMorphTargetData,

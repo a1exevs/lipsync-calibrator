@@ -5,12 +5,18 @@ import { APP_FOOTER_HEIGHT_PX } from 'src/ui/app-content/app-footer/app-footer.c
 import { GENERIC_PAPER_MARGIN_PX, GENERIC_PAPER_PADDING_PX } from 'src/ui/shared/components/mui-paper/mui-paper.consts';
 import { MUISpacePx } from 'src/ui/shared/styles/consts';
 
-const PANEL_HEIGHT = `calc(100vh - ${APP_BAR_MIN_HEIGHT_PX}px - ${APP_FOOTER_HEIGHT_PX}px - ${2 * GENERIC_PAPER_MARGIN_PX}px - ${2 * GENERIC_PAPER_PADDING_PX}px)`;
-const LEFT_TOOLBAR_WIDTH = `${8 * MUISpacePx}px`;
+export const PANEL_HEIGHT = `calc(100vh - ${APP_BAR_MIN_HEIGHT_PX}px - ${APP_FOOTER_HEIGHT_PX}px - ${2 * GENERIC_PAPER_MARGIN_PX}px - ${2 * GENERIC_PAPER_PADDING_PX}px)`;
+export const LEFT_TOOLBAR_WIDTH = `${8 * MUISpacePx}px`;
+export const RIGHT_TOOLBAR_WIDTH = `${40 * MUISpacePx}px`;
+
+const LEFT_PANEL_TEMPLATE_COLUMN = `minmax(${LEFT_TOOLBAR_WIDTH}, ${LEFT_TOOLBAR_WIDTH})`;
+const CONTENT_PANEL_TEMPLATE_COLUMN = `minmax(calc(100% - ${LEFT_TOOLBAR_WIDTH} - ${RIGHT_TOOLBAR_WIDTH} - ${4 * MUISpacePx}px),calc(100% - ${LEFT_TOOLBAR_WIDTH} - ${RIGHT_TOOLBAR_WIDTH} - ${4 * MUISpacePx}px))`;
+const RIGHT_PANEL_TEMPLATE_COLUMN = `minmax(${RIGHT_TOOLBAR_WIDTH},${RIGHT_TOOLBAR_WIDTH})`;
+
 const useClasses = makeStyles(() => ({
   threeDModelViewer: {
     display: 'grid',
-    gridTemplateColumns: `minmax(${LEFT_TOOLBAR_WIDTH}, ${LEFT_TOOLBAR_WIDTH}) minmax(80%,80%) minmax(calc(15% - ${LEFT_TOOLBAR_WIDTH}),calc(15% - ${LEFT_TOOLBAR_WIDTH}))`,
+    gridTemplateColumns: `${LEFT_PANEL_TEMPLATE_COLUMN} ${CONTENT_PANEL_TEMPLATE_COLUMN} ${RIGHT_PANEL_TEMPLATE_COLUMN}`,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',

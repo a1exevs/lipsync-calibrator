@@ -3,10 +3,10 @@ import {
   APP_SLICE_NAME,
   resetAvailableAnimationList,
   resetMorphTargetData,
-  resetSelectedAnimationUUID,
+  resetSelectedAnimationUUIDs,
   resetThreeDModelExtension,
   setAvailableAnimationList,
-  setSelectedAnimationUUID,
+  setSelectedAnimationUUIDs,
 } from 'src/store/slices/app/app.slice';
 import { AnimationItem } from 'src/store/slices/app/app.types';
 import { createAppAsyncThunk } from 'src/store/store';
@@ -17,7 +17,7 @@ export const resetThreeDModelViewerStepState = createAppAsyncThunk(
     dispatch(resetAvailableAnimationList());
     dispatch(resetThreeDModelExtension());
     dispatch(resetMorphTargetData());
-    dispatch(resetSelectedAnimationUUID());
+    dispatch(resetSelectedAnimationUUIDs());
   },
 );
 /**
@@ -43,8 +43,12 @@ export const updateAnimations = createAppAsyncThunk<{ animationToUpdate: Animati
     }
     dispatch(setAvailableAnimationList({ animations: updatedAnimmations }));
     const uuidBefore = animationBeforeUpdate?.uuid;
-    if (uuidBefore === state.selectedAnimationUUID) {
-      dispatch(setSelectedAnimationUUID({ animationUUID: animationToUpdate.uuid }));
+    if (state.selectedAnimationUUIDs.indexOf(uuidBefore) !== -1) {
+      dispatch(
+        setSelectedAnimationUUIDs({
+          animationUUIDs: [...state.selectedAnimationUUIDs.filter(uuid => uuid !== uuidBefore), animationToUpdate.uuid],
+        }),
+      );
     }
   },
 );

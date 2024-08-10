@@ -7,6 +7,7 @@ const useClasses = makeStyles(() => ({
     display: 'flex',
     gap: MUISpacePx,
     width: '100%',
+    maxWidth: '100%',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',

@@ -1,5 +1,3 @@
-import { TypographyProps } from '@mui/material/Typography';
-
 export const MUISpacePx = 8;
 
 export const windowMinWidth = 40 * MUISpacePx;
@@ -34,7 +32,7 @@ export const circleBorder = '50%';
 
 export const elevationNormal = 5;
 
-export const textOverflowEllipsis = (): TypographyProps => {
+export const textOverflowEllipsis = () => {
   return {
     textOverflow: 'ellipsis',
     overflow: 'hidden',

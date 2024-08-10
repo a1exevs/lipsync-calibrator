@@ -17,6 +17,9 @@ const enLabels = {
   NOTIFICATION: 'Notification',
   EXPAND_PLOT_PANEL: 'Expand Plot panel',
   COLLAPSE_PLOT_PANEL: 'Collapse Plot panel',
+  ANIMATIONS: 'Animations',
+  ON: 'On',
+  OFF: 'Off',
 };
 
 const enMessages = {
