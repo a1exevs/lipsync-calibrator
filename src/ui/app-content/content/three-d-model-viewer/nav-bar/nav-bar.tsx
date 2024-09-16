@@ -1,7 +1,6 @@
 import DownloadForOfflineRoundedIcon from '@mui/icons-material/DownloadForOfflineRounded';
 import UploadFileRoundedIcon from '@mui/icons-material/UploadFileRounded';
-import { Tooltip } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
+import { Button, Tooltip } from '@mui/material';
 import { useConfirm } from 'material-ui-confirm';
 import React, { useRef } from 'react';
 
@@ -11,7 +10,6 @@ import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
 import { MorphTargetData } from 'src/store/slices/app/app.types';
 import { ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-bar/context/error.types';
-import AnimationSelect from 'src/ui/app-content/content/three-d-model-viewer/animation-select/animation-select';
 import {
   jsonFileDownloadPostfix,
   jsonFileExtension,
@@ -148,25 +146,28 @@ const NavBar: React.FC<Props> = ({
 
   return (
     <MUIBox className={classes.navBar}>
-      <MUIBox className={classes.navBar__buttons}>
-        <IconButton onClick={handleUploadJSONButtonClick} title={currentLang.labels.UPLOAD_JSON} color="inherit">
-          <UploadFileRoundedIcon />
-          <FileInput ref={jsonFileInputRef} accept={jsonFileUploaderAccept} handleFileUpload={handleJSONFileUpload} />
-        </IconButton>
-        <Tooltip title={getDownloadButtonTooltip(allowToExportToJSON)}>
-          <div>
-            <IconButton
-              title={getDownloadButtonTitle(allowToExportToJSON)}
-              disabled={!allowToExportToJSON}
-              color="inherit"
-              onClick={handleDownloadJSONButtonClick}
-            >
-              <DownloadForOfflineRoundedIcon />
-            </IconButton>
-          </div>
-        </Tooltip>
-      </MUIBox>
-      <AnimationSelect />
+      <Button
+        startIcon={<UploadFileRoundedIcon />}
+        onClick={handleUploadJSONButtonClick}
+        title={currentLang.labels.UPLOAD_JSON}
+        color="inherit"
+      >
+        <FileInput ref={jsonFileInputRef} accept={jsonFileUploaderAccept} handleFileUpload={handleJSONFileUpload} />
+        {currentLang.labels.UPLOAD_JSON}
+      </Button>
+      <Tooltip title={getDownloadButtonTooltip(allowToExportToJSON)}>
+        <div>
+          <Button
+            startIcon={<DownloadForOfflineRoundedIcon />}
+            title={getDownloadButtonTitle(allowToExportToJSON)}
+            disabled={!allowToExportToJSON}
+            color="inherit"
+            onClick={handleDownloadJSONButtonClick}
+          >
+            {currentLang.labels.DOWNLOAD_JSON}
+          </Button>
+        </div>
+      </Tooltip>
     </MUIBox>
   );
 };

@@ -9,6 +9,7 @@ import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { currentLang } from 'src/common/land/lang.helper';
 import { AppStep } from 'src/common/types/app';
 import { Nullable } from 'src/common/types/common';
+import AnimationSelect from 'src/ui/app-content/content/three-d-model-viewer/animation-select/animation-select';
 import FileUploaderContainer from 'src/ui/app-content/content/three-d-model-viewer/file-uploader/file-uploader.container';
 import MorphTargetPlotListContainer from 'src/ui/app-content/content/three-d-model-viewer/morph-target-plot-list/morph-target-plot-list.container';
 import NavBarContainer from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/nav-bar.container';
@@ -43,6 +44,16 @@ const ThreeDModelViewer: React.FC<Props> = ({ step, setContentPanelOffsetWidth }
   const isViewerActive = step === AppStep.THREE_D_MODEL_VIEWER_STEP;
 
   useEffect(() => {
+    const setContentPanelOffsetWidthFn = () => {
+      setContentPanelOffsetWidth(contentPanelRef.current?.offsetWidth ?? null);
+    };
+    window.addEventListener('resize', setContentPanelOffsetWidthFn);
+    return () => {
+      window.removeEventListener('resize', setContentPanelOffsetWidthFn);
+    };
+  }, []);
+
+  useEffect(() => {
     if (step === AppStep.FILE_UPLOADER_STEP && isPlotPanelOpened) {
       setPLotPanelOpen(false);
     }
@@ -60,6 +71,10 @@ const ThreeDModelViewer: React.FC<Props> = ({ step, setContentPanelOffsetWidth }
   };
   const getPlotPanelButtonTooltip = (): string => {
     return isViewerActive ? '' : currentLang.messages.PLOT_PANEL_NOT_AVAILABLE;
+  };
+
+  const getPlotPanelWidth = (): string => {
+    return `${contentPanelRef.current?.offsetWidth ?? 300}px`;
   };
 
   return (
@@ -90,12 +105,17 @@ const ThreeDModelViewer: React.FC<Props> = ({ step, setContentPanelOffsetWidth }
             </Suspense>
             <axesHelper args={[axesSize]} />
           </Canvas>
-          {isPlotPanelOpened && <MorphTargetPlotListContainer />}
+          {isPlotPanelOpened && (
+            <MUIBox sx={{ width: getPlotPanelWidth() }} display="flex" flexDirection="column">
+              <NavBarContainer />
+              <MorphTargetPlotListContainer />
+            </MUIBox>
+          )}
         </MUIPaper>
       </div>
       <MUIPaper className={classes.threeDModelViewer__rightPanel} elevation={elevationNormal}>
         {step === AppStep.FILE_UPLOADER_STEP && <FileUploaderContainer />}
-        {isViewerActive && <NavBarContainer />}
+        {isViewerActive && <AnimationSelect />}
       </MUIPaper>
     </MUIBox>
   );
