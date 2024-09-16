@@ -5,8 +5,4 @@ export const jsonStructureExample: Shape[] = [
     shapeName: 'shapeName1',
     data: [{ time: 0, value: 0.1 }],
   },
-  {
-    shapeName: 'shapeName2',
-    data: [{ time: 0, value: 0.1 }],
-  },
 ];

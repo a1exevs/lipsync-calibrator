@@ -39,6 +39,7 @@ const enMessages = {
     'You have some unsaved changes in the current plots. Your changes will be discarded after clicking Back. Do you want to proceed to the previous page?',
   PLOT_PANEL_NO_DATA: `Use the '${UPLOAD_JSON_EN}' button to upload the data. Plots  for working with shapes will be displayed here.`,
   PLOT_PANEL_NOT_AVAILABLE: 'The plot panel will be available after you select the 3D model file you need.',
+  PLOT_DATA_EXAMPLE: 'Plot data example',
 };
 
 const enErrors = {
