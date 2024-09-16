@@ -4,6 +4,7 @@ import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader';
 import { isEmpty, isUndefined } from 'src/common/helpers/guards';
 import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
+import { millisecToSec } from 'src/store/slices/app/app.slice';
 import { Shape } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
 import {
   SupportedThreeDModelExtension,
@@ -62,7 +63,7 @@ export function getKeyFrameTracks(
   for (let i = 0; i < pointCount; i++) {
     shapeNames.forEach((shapeName, index) => {
       if (index === 0) {
-        times.push(morphTargets?.[shapeName]?.data[i].time ?? 0);
+        times.push(millisecToSec(morphTargets?.[shapeName]?.data[i].time ?? 0));
       }
       values.push(morphTargets?.[shapeName].data[i].value ?? 0);
     });

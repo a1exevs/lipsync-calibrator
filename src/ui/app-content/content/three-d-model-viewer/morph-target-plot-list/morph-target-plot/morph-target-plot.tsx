@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import * as d3 from 'd3';
 import React, { useEffect, useRef, useState } from 'react';
 
+import { currentLang } from 'src/common/land/lang.helper';
 import { Nullable } from 'src/common/types/common';
 import {
   defineLine,
@@ -41,8 +42,6 @@ const MorphTargetPlot: React.FC<Porps> = ({ plotName, points, updatePoints, plot
   const margin = { top: 20, right: 30, bottom: 50, left: 60 };
   const draggablePointSize = 5;
   const draggablePointColor = 'red';
-  const xAxisLabel = 'Time, s';
-  const yAxisLabel = 'Morph Target value';
   const lineColor = 'steelblue';
 
   useEffect(() => {
@@ -57,8 +56,16 @@ const MorphTargetPlot: React.FC<Porps> = ({ plotName, points, updatePoints, plot
     const yAxis = d3.axisLeft(yScaleFn);
     const bezierLine = defineLine({ xScaleFn, yScaleFn });
     setPointsToPlot({ svg, points: indexesPoints, line: bezierLine, lineColor });
-    setupXAxis({ svg, xAxis, width, height, xAxisLabel, textColor, marginBottom: margin.bottom });
-    setupYAxis({ svg, yAxis, height, yAxisLabel, textColor, marginLeft: margin.left });
+    setupXAxis({
+      svg,
+      xAxis,
+      width,
+      height,
+      xAxisLabel: currentLang.labels.PLOT_X_AXIS_LABEL,
+      textColor,
+      marginBottom: margin.bottom,
+    });
+    setupYAxis({ svg, yAxis, height, yAxisLabel: currentLang.labels.PLOT_Y_AXIS, textColor, marginLeft: margin.left });
 
     const drag = d3
       .drag<SVGCircleElement, IdentifiedTimeValue>()
