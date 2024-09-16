@@ -9,6 +9,14 @@ import { AnimationItem, MorphTargetData } from 'src/store/slices/app/app.types';
 import { TimeValue } from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/validators/json-structure-validator.types';
 import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.types';
 
+export function secToMillisec(sec: number): number {
+  return sec * 1000;
+}
+
+export function millisecToSec(millisec: number): number {
+  return millisec / 1000;
+}
+
 const appSlice = createSlice({
   name: 'app',
   initialState,
@@ -47,9 +55,17 @@ const appSlice = createSlice({
     },
     setMorphTargetData(state, { payload }: PayloadAction<{ data: MorphTargetData }>): void {
       const { data, fileName } = payload.data;
+      data.forEach(dataSet => {
+        dataSet.data.forEach(point => {
+          // d3 drag functionality works better with x-values > 1
+          // so we transform seconds to milliseconds
+          point.time = secToMillisec(point.time);
+        });
+      });
       const morphTargetDataMap = arrayToObject(data, 'shapeName');
       state.morphTargetNames = Object.keys(morphTargetDataMap);
       state.morphTargetDataMap = morphTargetDataMap;
+
       state.morphTargetDataFileName = fileName;
 
       state.allowToExportToJSON = !isEmpty(payload.data);

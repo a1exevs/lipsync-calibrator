@@ -3,7 +3,7 @@ import React from 'react';
 import {
   allowToExportToJSON,
   morphTargetDataFileName,
-  morphTargetDataMap,
+  morphTargetDataMapToDownload,
   wasMorphTargetDataChanged,
 } from 'src/store/slices/app/app.selectors';
 import { resetMorphTargetData, setMorphTargetData, setWasMorphTargetDataChanged } from 'src/store/slices/app/app.slice';
@@ -18,7 +18,7 @@ const NavBarContainer: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const allowToExport = useAppSelector(allowToExportToJSON);
-  const morphTargetMap = useAppSelector(morphTargetDataMap);
+  const morphTargetMap = useAppSelector(morphTargetDataMapToDownload);
   const morphTargetDataFile = useAppSelector(morphTargetDataFileName);
   const wasMorphTargetChanged = useAppSelector(wasMorphTargetDataChanged);
 

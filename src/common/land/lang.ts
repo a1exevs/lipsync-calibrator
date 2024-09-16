@@ -20,6 +20,8 @@ const enLabels = {
   ANIMATIONS: 'Animations',
   ON: 'On',
   OFF: 'Off',
+  PLOT_X_AXIS_LABEL: 'Time, ms',
+  PLOT_Y_AXIS: 'Morph Target value',
 };
 
 const enMessages = {
