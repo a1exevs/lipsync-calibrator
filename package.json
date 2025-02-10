@@ -1,6 +1,6 @@
 {
   "name": "lipsync-calibrator",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Application for calibrating viseme 3D models.",
   "author": "AlexEvs",
   "private": true,
