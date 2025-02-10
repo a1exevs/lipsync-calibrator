@@ -1,169 +1,123 @@
-import React, { useEffect, useRef } from 'react';
-import { AnimationMixer, Clock, Group, Scene, WebGLRenderer } from 'three';
-import { Camera } from 'three/src/cameras/Camera';
+import ShowChartOutlinedIcon from '@mui/icons-material/ShowChartOutlined';
+import { Tooltip } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import { IconButtonOwnProps } from '@mui/material/IconButton/IconButton';
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 
-import { isNull } from 'src/common/helpers/guards';
+import { currentLang } from 'src/common/land/lang.helper';
+import { AppStep } from 'src/common/types/app';
 import { Nullable } from 'src/common/types/common';
-import { ResetErrorFn, SetErrorFn } from 'src/ui/app-content/content/error-context/error.types';
-import { getDriverByFileExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map';
-import { SupportedThreeDModelExtension } from 'src/ui/app-content/content/three-d-model-viewer/drivers/driver-config-map.types';
+import AnimationSelect from 'src/ui/app-content/content/three-d-model-viewer/animation-select/animation-select';
+import FileUploaderContainer from 'src/ui/app-content/content/three-d-model-viewer/file-uploader/file-uploader.container';
+import MorphTargetPlotListContainer from 'src/ui/app-content/content/three-d-model-viewer/morph-target-plot-list/morph-target-plot-list.container';
+import NavBarContainer from 'src/ui/app-content/content/three-d-model-viewer/nav-bar/nav-bar.container';
+import ThreeDModelSceneContainer from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-scene/three-d-model-scene.container';
+import {
+  axesSize,
+  gridColor1,
+  gridColor2,
+  gridDivision,
+  gridSize,
+  lightColor,
+  lightIntensity,
+  lightPosition,
+} from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.consts';
 import useClasses from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer.styles';
-import MUIPaper from 'src/ui/common/components/mui-paper/mui-paper';
-import { elevationNormal } from 'src/ui/common/styles/consts';
+import MUIBox from 'src/ui/shared/components/mui-box/mui-box';
+import MUIPaper from 'src/ui/shared/components/mui-paper/mui-paper';
+import { elevationNormal } from 'src/ui/shared/styles/consts';
 
 type Props = {
-  model: Nullable<Group>;
-  modelExtension: Nullable<SupportedThreeDModelExtension>;
-  selectedAnimationUUID: Nullable<string>;
-  setError: SetErrorFn;
-  resetError: ResetErrorFn;
-  blockUI: () => void;
-  unblockUI: () => void;
+  step: AppStep;
+  setContentPanelOffsetWidth: (_: Nullable<number>) => void;
 };
 
-const ThreeDModelViewer: React.FC<Props> = ({
-  model,
-  modelExtension,
-  selectedAnimationUUID,
-  setError,
-  blockUI,
-  unblockUI,
-}) => {
-  const mountRef = useRef<Nullable<HTMLDivElement>>(null);
-  const rendererRef = useRef<Nullable<WebGLRenderer>>(null);
-  const mixerRef = useRef<Nullable<AnimationMixer>>(null);
-  const requestAnimationRef = useRef<Nullable<number>>(null);
-  const clockRef = useRef<Nullable<Clock>>(null);
-  const sceneRef = useRef<Nullable<Scene>>(null);
-  const cameraRef = useRef<Nullable<Camera>>(null);
-
+const ThreeDModelViewer: React.FC<Props> = ({ step, setContentPanelOffsetWidth }) => {
   const classes = useClasses();
 
-  const animate = (): Nullable<number> => {
-    if (isNull(requestAnimationRef.current)) {
-      return null;
-    }
-    requestAnimationRef.current = requestAnimationFrame(animate);
-    if (
-      !isNull(sceneRef.current) &&
-      !isNull(cameraRef.current) &&
-      !isNull(mixerRef.current) &&
-      !isNull(rendererRef.current) &&
-      !isNull(clockRef.current)
-    ) {
-      mixerRef.current.update(clockRef.current.getDelta());
-      rendererRef.current.render(sceneRef.current, cameraRef.current);
-    }
-    return requestAnimationRef.current;
-  };
+  const contentPanelRef = useRef<Nullable<HTMLDivElement>>(null);
 
-  const init = (
-    threeDModel: Nullable<Group>,
-    uuid: Nullable<string>,
-  ): Nullable<{ renderer: WebGLRenderer; mixer: AnimationMixer; clock: Clock; scene: Scene; camera: Camera }> => {
-    if (isNull(modelExtension) || isNull(threeDModel)) {
-      return null;
-    }
+  const [isPlotPanelOpened, setPLotPanelOpen] = useState<boolean>(false);
 
-    const driver = getDriverByFileExtension(modelExtension);
-
-    if (
-      !isNull(sceneRef.current) &&
-      !isNull(cameraRef.current) &&
-      !isNull(mixerRef.current) &&
-      !isNull(rendererRef.current) &&
-      !isNull(clockRef.current)
-    ) {
-      if (isNull(uuid)) {
-        driver.stopAllAnimations(mixerRef.current);
-        requestAnimationRef.current = null;
-        return null;
-      }
-      driver.rerunAnimation(threeDModel, selectedAnimationUUID, mixerRef.current);
-      requestAnimationRef.current = -1;
-      requestAnimationRef.current = animate();
-      return {
-        renderer: rendererRef.current,
-        mixer: mixerRef.current,
-        clock: clockRef.current,
-        scene: sceneRef.current,
-        camera: cameraRef.current,
-      };
-    }
-
-    if (isNull(uuid)) {
-      return null;
-    }
-
-    const clock = new Clock();
-    const camera = driver.getConfiguredCamera();
-    const renderer = driver.getWebGlRenderer();
-    const light = driver.getLight();
-    const scene = driver.getScene(light);
-    const mixer: Nullable<AnimationMixer> = driver.setupAndPlayAnimation(threeDModel, selectedAnimationUUID);
-    driver.setModelToScene(threeDModel, scene);
-
-    requestAnimationRef.current = -1;
-    requestAnimationRef.current = animate();
-
-    return { renderer, mixer, clock, scene, camera };
-  };
-
-  const clearAnimationFrame = (): void => {
-    if (!isNull(requestAnimationRef.current)) {
-      cancelAnimationFrame(requestAnimationRef.current);
-      requestAnimationRef.current = null;
-    }
-  };
-
-  const unmountScene = (): void => {
-    if (!isNull(rendererRef.current) && !isNull(mountRef.current)) {
-      mountRef.current.removeChild(rendererRef.current.domElement);
-      rendererRef.current.dispose();
-      rendererRef.current.resetState();
-      rendererRef.current = null;
-    }
-    if (!isNull(mixerRef.current)) {
-      mixerRef.current.stopAllAction();
-      mixerRef.current = null;
-    }
-    clockRef.current = null;
-    sceneRef.current = null;
-    cameraRef.current = null;
-    clearAnimationFrame();
-  };
+  const isViewerActive = step === AppStep.THREE_D_MODEL_VIEWER_STEP;
 
   useEffect(() => {
-    return () => unmountScene();
+    const setContentPanelOffsetWidthFn = () => {
+      setContentPanelOffsetWidth(contentPanelRef.current?.offsetWidth ?? null);
+    };
+    window.addEventListener('resize', setContentPanelOffsetWidthFn);
+    return () => {
+      window.removeEventListener('resize', setContentPanelOffsetWidthFn);
+    };
   }, []);
 
   useEffect(() => {
-    try {
-      // TODO Research why blockUI doesn't work
-      blockUI();
-      const result = init(model, selectedAnimationUUID);
-      if (!isNull(result)) {
-        const { renderer, mixer, clock, scene, camera } = result;
-        rendererRef.current = renderer;
-        mixerRef.current = mixer;
-        clockRef.current = clock;
-        cameraRef.current = camera;
-        sceneRef.current = scene;
-        mountRef.current?.appendChild(renderer.domElement);
-      }
-    } catch (e) {
-      if (e instanceof Error) {
-        setError(e.message, 'error');
-      }
-    } finally {
-      unblockUI();
+    if (step === AppStep.FILE_UPLOADER_STEP && isPlotPanelOpened) {
+      setPLotPanelOpen(false);
     }
-  }, [model, selectedAnimationUUID]);
+  }, [step]);
+
+  const handlePlotPanelOpen = () => {
+    setContentPanelOffsetWidth(contentPanelRef.current?.offsetWidth ?? null);
+    setPLotPanelOpen(show => !show);
+  };
+  const getPlotPanelButtonTitle = (): string => {
+    return isPlotPanelOpened ? currentLang.labels.COLLAPSE_PLOT_PANEL : currentLang.labels.EXPAND_PLOT_PANEL;
+  };
+  const getPlotPanelButtonColor = (): IconButtonOwnProps['color'] => {
+    return isPlotPanelOpened ? 'primary' : 'default';
+  };
+  const getPlotPanelButtonTooltip = (): string => {
+    return isViewerActive ? '' : currentLang.messages.PLOT_PANEL_NOT_AVAILABLE;
+  };
+
+  const getPlotPanelWidth = (): string => {
+    return `${contentPanelRef.current?.offsetWidth ?? 300}px`;
+  };
 
   return (
-    <MUIPaper className={classes.threeDModelViewer} elevation={elevationNormal}>
-      <div ref={mountRef} />
-    </MUIPaper>
+    <MUIBox className={classes.threeDModelViewer}>
+      <MUIPaper className={classes.threeDModelViewer__leftPanel} elevation={elevationNormal}>
+        <Tooltip placement="right-end" title={getPlotPanelButtonTooltip()}>
+          <div>
+            <IconButton
+              color={getPlotPanelButtonColor()}
+              title={getPlotPanelButtonTitle()}
+              onClick={handlePlotPanelOpen}
+              aria-label="plot-panel-button"
+              disabled={!isViewerActive}
+            >
+              <ShowChartOutlinedIcon />
+            </IconButton>
+          </div>
+        </Tooltip>
+      </MUIPaper>
+      <div ref={contentPanelRef}>
+        <MUIPaper className={classes.threeDModelViewer__contentPanel} elevation={elevationNormal}>
+          <Canvas>
+            <OrbitControls />
+            <directionalLight intensity={lightIntensity} color={lightColor} position={lightPosition} />
+            <gridHelper args={[gridSize, gridDivision, gridColor1, gridColor2]} />
+            <Suspense fallback={null}>
+              <ThreeDModelSceneContainer />
+            </Suspense>
+            <axesHelper args={[axesSize]} />
+          </Canvas>
+          {isPlotPanelOpened && (
+            <MUIBox sx={{ width: getPlotPanelWidth() }} display="flex" flexDirection="column">
+              <NavBarContainer />
+              <MorphTargetPlotListContainer />
+            </MUIBox>
+          )}
+        </MUIPaper>
+      </div>
+      <MUIPaper className={classes.threeDModelViewer__rightPanel} elevation={elevationNormal}>
+        {step === AppStep.FILE_UPLOADER_STEP && <FileUploaderContainer />}
+        {isViewerActive && <AnimationSelect />}
+      </MUIPaper>
+    </MUIBox>
   );
 };
 

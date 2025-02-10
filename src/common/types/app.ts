@@ -1,5 +1,6 @@
 export enum AppStep {
   FILE_UPLOADER_STEP = 'FILE_UPLOADER_STEP',
-  ANIMATION_LIST_STEP = 'ANIMATION_LIST_STEP',
   THREE_D_MODEL_VIEWER_STEP = 'THREE_D_MODEL_VIEWER_STEP',
 }
+
+export type IdentifiedItem = { id: number };

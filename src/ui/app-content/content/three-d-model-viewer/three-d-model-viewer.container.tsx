@@ -1,33 +1,12 @@
-import React from 'react';
-
-import { selectedAnimationUUID, threeDModelExtension } from 'src/store/slices/app/app.selectors';
-import { useError } from 'src/ui/app-content/content/error-context/use-error';
-import { useThreeDModel } from 'src/ui/app-content/content/three-d-model-context/use-three-d-model';
+import { appStep } from 'src/store/slices/app/app.selectors';
+import { useViewerGeometry } from 'src/ui/app-content/content/three-d-model-viewer/contexts/viewer-geometry/use-viewer-geometry';
 import ThreeDModelViewer from 'src/ui/app-content/content/three-d-model-viewer/three-d-model-viewer';
-import { useUiBlocker } from 'src/ui/app-content/content/ui-blocker-context/use-ui-blocker';
-import { useAppSelector } from 'src/ui/common/hooks/store-hooks';
+import { useAppSelector } from 'src/ui/shared/hooks/store-hooks';
 
-const ThreeDModelViewerContainer: React.FC = () => {
-  const { setError, resetError } = useError();
-
-  const { threeDModel } = useThreeDModel();
-
-  const animationUUID = useAppSelector(selectedAnimationUUID);
-  const modelExtension = useAppSelector(threeDModelExtension);
-
-  const { blockUI, unblockUI } = useUiBlocker();
-
-  return (
-    <ThreeDModelViewer
-      model={threeDModel}
-      modelExtension={modelExtension}
-      selectedAnimationUUID={animationUUID}
-      setError={setError}
-      resetError={resetError}
-      blockUI={blockUI}
-      unblockUI={unblockUI}
-    ></ThreeDModelViewer>
-  );
+const ThreeDModelViewerContainer = () => {
+  const step = useAppSelector(appStep);
+  const { setOffsetWidth } = useViewerGeometry();
+  return <ThreeDModelViewer step={step} setContentPanelOffsetWidth={setOffsetWidth} />;
 };
 
 export default ThreeDModelViewerContainer;
